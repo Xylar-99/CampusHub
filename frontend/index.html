@@ -1,11 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <title>My Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f7f9fc;
+      color: #333;
+    }
+
+    header {
+      background: #1e1e2f;
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      padding: 8px 16px;
+      border-radius: 6px;
+      background: #3a3a5f;
+      transition: background 0.3s;
+    }
+
+    nav a:hover {
+      background: #55557a;
+    }
+
+    .hero {
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .hero h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      max-width: 600px;
+      margin-bottom: 30px;
+    }
+
+    .btn-group a {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 24px;
+      background: #4CAF50;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .btn-group a:nth-child(2) {
+      background: #2196F3;
+    }
+
+    .btn-group a:nth-child(3) {
+      background: #ff9800;
+    }
+
+    .btn-group a:nth-child(4) {
+      background: #9c27b0;
+    }
+
+    .btn-group a:hover {
+      opacity: 0.9;
+    }
+
+    footer {
+      background: #1e1e2f;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+  </style>
 </head>
 <body>
-    <p>hello world </p>
-</body>
-</html>
+
+  <header>
+    <h1>My Portfolio</h1>
+    <nav>
+      <a href="./pages/signup.html">Sign Up</a>
+      <a href="./pages/login.html">Login</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Welcome to My Portfolio</h2>
+    <p>This is a simple personal portfolio landing page. You can sign up, log in, read the blog, or contact me directly.</p>
+    
+  </section>
+
+  <footer>
+    &copy;

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Profile container */
+.profile {
+  display: flex;
+  align-items: center;
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile picture */
+.profile-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+/* Profile information */
+.profile-info {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Profile name */
+.profile-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Profile bio */
+.profile-bio {
+  font-size: 16px;
+  color: #555;
+  margin: 10px 0;
+}
+
+/* Profile location */
+.profile-location {
+  font-size: 14px;
+  color: #777;
+}
+
+    </style>
+</head>
+<body>
+
+<div class="profile">
+  <img src="../images/default.jpg" alt="Profile Picture" class="profile-img">
+  <div class="profile-info">
+    <h1 class="profile-name"  id="username">John Doe</h1>
+    <p class="profile-bio" id="bio">Web developer and tech enthusiast.</p>
+    <p class="profile-location" id="location">Location: San Francisco, CA</p>
+  </div>
+</div>
+
+<script src="../js/profile.js" > </script>
+</body>
+</html>
