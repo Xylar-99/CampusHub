@@ -8,13 +8,6 @@ async function getRootHandler(req , res)
 }
 
 
-async function getLoginFileHandler(req , res) 
-{
-    return res.type('text/html').sendFile('./pages/login.html')
-}
-
-
-
 
 async function getUserHandler(req , res) 
 {
@@ -36,4 +29,4 @@ async function getUserHandler(req , res)
 
 
 
-module.exports = {getRootHandler ,getLoginFileHandler ,getUserHandler };
+module.exports = {getRootHandler ,getUserHandler };

@@ -17,12 +17,6 @@ const routes = [
         url     : '/'  ,
         handler : getHandlers.getRootHandler,
     } ,
-    
-    {
-        method  : 'GET', 
-        url     : '/login.html' ,
-        handler : getHandlers.getLoginFileHandler,
-    } ,
     {
         method  : 'GET', 
         url     : '/user'  ,

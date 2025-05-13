@@ -45,7 +45,7 @@ async function postLoginHandler(req , res)
 async function postDetailsHandler(req , res)
 {
 
-    const user1 = await users.getUserByUsername('abquaoub');
+    const user1 = await users.getUserByRequest(req);
 
 
     const data_of_user = {};
@@ -58,7 +58,6 @@ async function postDetailsHandler(req , res)
         const uploadPath = path.join(__dirname, '../../frontend/images', part.filename);
         await pump(part.file, fs.createWriteStream(uploadPath)); 
         data_of_user.img = "../images/" + part.filename;
-        console.log(data_of_user.img);
         }
       else
             data_of_user[part.fieldname] = part.value;
@@ -66,7 +65,6 @@ async function postDetailsHandler(req , res)
     }
     data_of_user.user_id = user1.id;
 
-    console.log(data_of_user);
     userInfo.create(data_of_user);
     return res.redirect('/')
 }
