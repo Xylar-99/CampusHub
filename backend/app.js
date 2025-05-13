@@ -17,11 +17,7 @@ const routes = [
         url     : '/'  ,
         handler : getHandlers.getRootHandler,
     } ,
-    {
-        method  : 'GET', 
-        url     : '/profile'  ,
-        handler : getHandlers.getProfileHandler,
-    } ,
+    
     {
         method  : 'GET', 
         url     : '/login.html' ,
@@ -43,6 +39,12 @@ const routes = [
         url     : '/login' ,
         handler : postHandlers.postLoginHandler,
         schema  : {schema: {body : authSchemas.loginSchema}},
+    },
+    {
+        method  : 'POST' , 
+        url     : '/user/details' ,
+        handler : postHandlers.postDetailsHandler,
+        schema  : {schema: {body : authSchemas.detailsSchema}},
     }
 
 ]

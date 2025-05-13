@@ -75,17 +75,13 @@
 
   <div class="container">
     <h1>User Profile Information</h1>
-    <form action="#" method="POST">
-      <!-- Profile Picture -->
-      <div class="form-group">
-        <label for="profile-picture">Profile Picture</label>
-        <input type="file" id="profile-picture" name="profile-picture" accept="image/*">
-      </div>
+    <form action="/user/details" method="POST" enctype="multipart/form-data" >
 
-      <!-- Name -->
+
+      <!-- Full Name -->
       <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        <input type="text" id="name" name="fullName" placeholder="Enter your name" required>
       </div>
 
       <!-- Bio -->
@@ -106,16 +102,10 @@
         <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
       </div>
 
-      <!-- Email -->
+      <!-- Profile Picture -->
       <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email" required>
-      </div>
-
-      <!-- Social Media Links -->
-      <div class="form-group">
-        <label for="social-media">Social Media Links (Optional)</label>
-        <input type="text" id="social-media" name="social-media" placeholder="Enter your social media URL">
+        <label for="avatar">Profile Picture</label>
+        <input type="file" id="profile-picture" name="img" accept="image/*">
       </div>
 
       <!-- Submit Button -->

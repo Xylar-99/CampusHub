@@ -1,19 +1,12 @@
-const sqlite3 = require('sqlite3')
-const path = require('path');
-const fs = require('fs')
+const { Sequelize } = require('sequelize');
+const path = require('path')
 
-const dbFile = path.join(__dirname , 'database.db'); 
+const file = path.join(__dirname , 'database.sqlite');
 
-const SQLquery = fs.readFileSync(path.join(__dirname , 'query.sql') , 'utf-8');
+const sequelize = new Sequelize({
+  dialect: 'sqlite',
+  storage: file,
+  logging: false, 
+});
 
-const db = new sqlite3.Database(dbFile);
-
-function CreateTable()
-{
-    db.run(SQLquery);
-}
-
-CreateTable();
-
-
-module.exports = {db , CreateTable};
+module.exports = sequelize;

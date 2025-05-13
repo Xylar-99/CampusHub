@@ -1,18 +1,9 @@
-const db = require('../db/db').db
+const User = require('../models/User')
 const app = require('../services/server').app
 
 async function getUserByUsername(username)
 {
-    const sql = 'SELECT * FROM users WHERE username = ?';
-
-    const user = new Promise((resolve , reject ) => {
-        db.get(sql , [username] , (err , rows) => {
-            if(err)
-                reject(err);
-            else
-                resolve(rows);
-        });
-    })
+    const user = await User.findOne({ where: { username: username } });
 
     return user;
 }

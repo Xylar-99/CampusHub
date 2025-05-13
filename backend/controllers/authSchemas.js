@@ -15,11 +15,23 @@ const loginSchema = {
 const signupSchema = {
     type : "object" ,
     properties : {
-        fname : {type: "string"},
-        lname : {type: "string"},
         username : {type: "string"},
         email : {type: "string" , format : 'email'},
         password : {type: "string" },
+    },
+    required : ['username' , 'email' , 'password'],
+    additionalProperties: false
+
+}
+
+
+const detailsSchema = {
+    type : "object" ,
+    properties : {
+        fullname : {type: "string"},
+        bio      : {type: "string"},
+        location : {type: "string"},
+        phone    : {type: "string" , format : 'email'},
     },
     required : ['fname' , 'lname' , 'username' , 'email' , 'password'],
     additionalProperties: false
@@ -27,5 +39,4 @@ const signupSchema = {
 }
 
 
-
-module.exports = {loginSchema , signupSchema};
+module.exports = {loginSchema  , detailsSchema, signupSchema};
