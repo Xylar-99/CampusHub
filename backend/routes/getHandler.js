@@ -9,6 +9,12 @@ async function getRootHandler(req , res)
 
 
 
+
+async function getProfileHandler(req , res) 
+{
+   return res.sendFile('./pages/profile.html')
+}
+
 async function getUserHandler(req , res) 
 {
     const user = await users.getUserByRequest(req);
@@ -43,6 +49,7 @@ async function getPostsHandler(req , res)
     const data1 =
         {
          fullName : profile.fullName,
+         profile : profile.img,
          title      : post.title,
          content : post.content,
          img      : post.img,
@@ -57,4 +64,4 @@ async function getPostsHandler(req , res)
 
 
 
-module.exports = {getRootHandler , getPostsHandler ,getUserHandler };
+module.exports = {getRootHandler  , getProfileHandler, getPostsHandler ,getUserHandler };

@@ -3,64 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/profile.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <title>Document</title>
-    <style>
-        /* Profile container */
-.profile {
-  display: flex;
-  align-items: center;
-  background-color: #f4f4f4;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
 
-/* Profile picture */
-.profile-img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-right: 20px;
-}
-
-/* Profile information */
-.profile-info {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Profile name */
-.profile-name {
-  font-size: 24px;
-  font-weight: bold;
-  margin: 0;
-}
-
-/* Profile bio */
-.profile-bio {
-  font-size: 16px;
-  color: #555;
-  margin: 10px 0;
-}
-
-/* Profile location */
-.profile-location {
-  font-size: 14px;
-  color: #777;
-}
-
-    </style>
 </head>
 <body>
 
-<div class="profile">
-  <img src="/home/abd3lb4554t/Desktop/CampusHub/frontend/images/default.jpg" id="avatar" alt="Profile Picture" class="profile-img">
-  <div class="profile-info">
-    <h1 class="profile-name"  id="fullName">John Doe</h1>
-    <p class="profile-bio" id="bio">Web developer and tech enthusiast.</p>
-    <p class="profile-location" id="location">Location: San Francisco, CA</p>
+
+<div class="container">
+  
+  
+  <nav class="info-user" >
+    <div class="logo">
+      <div class="fb-icon">
+        <i class="fab fa-facebook"></i> <span>Abd3lb4554t</span>
+      </div>
+
+      
+      <div class="search">
+      </div>
+      
+      <div class="main-div">
+        
+        <a href="">
+          <i class="fas fa-home"></i>  <span>Home</span>
+        </a>
+        <a href="">
+          <i class="fas fa-book-open"></i> <span> Book </span>
+        </a>
+        <a href="">
+          <i class="fas fa-user-friends"></i> <span> Friends </span>
+        </a>
+        <a href="">
+          <i class="fas fa-plug"></i> <span> API/Integration </span>
+        </a>
+        <a href="">
+          <i class="fas fa-rss"></i> <span> Subscription </span>
+        </a>
+        <a href="">
+          <i class="fas fa-cogs"></i> <span> Settings </span>
+        </a>
+        <a href="">
+          <i class="fas fa-question-circle"></i> <span> Help </span>
+        </a>
+      </div>
+      
+    </div>
+    
+    <div class="logout">
+      <div class="prof">
+        
+        <img src="../images/abquaoub.jpeg" alt="">
+        
+        <div class="name-log">
+          <p>ABDELBASSAT</p>
+          <h5>Basic Member</h5>
+        </div>
+      </div>
+    
+      <i class="fas fa-sign-out-alt"></i>
+    </div>
+    
+  </nav>
+  
+  
+  
+  
+  <main>
+    
+    <div class="post-search">
+    <input type="search" value="Search for friends , groups , pages">
+    <button >Add New Post</button>
   </div>
+  
+  <div class="stories">
+    <div class="storie-user">
+      <img src="../images/abquaoub.jpeg" alt="">
+      <h4>abdelabssat</h4>
+    </div>
+    <div class="storie-user">
+      <img src="../images/abquaoub.jpeg" alt="">
+      <h4>abdelabssat</h4>
+    </div>
+    <div class="storie-user">
+      <img src="../images/abquaoub.jpeg" alt="">
+      <h4>abdelabssat</h4>
+    </div>
+    <div class="storie-user">
+      <img src="../images/abquaoub.jpeg" alt="">
+      <h4>abdelabssat</h4>
+    </div>
+    <div class="storie-user">
+      <img src="../images/abquaoub.jpeg" alt="">
+      <h4>abdelabssat</h4>
+    </div>
+    <div class="storie-user">
+      <img src="../images/abquaoub.jpeg" alt="">
+      <h4>abdelabssat</h4>
+    </div>
+  </div>
+  
+  
+  
+<div class="square" id="postsContainer">
+
+  <!-- <div class="h1">
+    <img src="../images/abquaoub.jpeg" alt="">
+    
+    <div class="title">
+      <h5>abdelbassat</h5>
+      <p>Share Your Thoughts</p>
+    </div>
+    
+  </div>
+    
+  <div class="content">
+    <p>Apple is more than a tech company; it became a culture unto itself, a passion of most <br>of people and the birthplace of the world’s most revolutionized products.</p>
+    <img src="https://images.unsplash.com/photo-1504610926078-a1611febcad3?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e1c8fe0c9197d66232511525bfd1cc82&auto=format&fit=crop&w=1100&q=80" class="mask">
+  </div> -->
+    
+  </div>
+  
+  
+</main>
+
+
+
+<nav class="nav-friends" >
+  
+  
+  <div class="icon-setting" >
+    <img src="../images/abquaoub.jpeg" alt="image of profile">
+    <div class="icons">
+      <i class="fas fa-envelope"></i>
+      <i class="fas fa-bell"></i>
+      <i class="fas fa-cog"></i>
+    </div>
+  </div>
+  
+  <div class="invite">
+    
+    <h2>friends Suggestions </h2>
+    <section>
+      <img src="../images/abquaoub.jpeg" alt="">
+      <div>
+
+        <h4>abdelbassat quaoubai</h4>
+        <p>abquaoub</p>
+      </div>
+      <a href="" ><i class="fas fa-user-plus"></i></a>
+    </section>
+    <section>
+      <img src="../images/abquaoub.jpeg" alt="">
+           <div>
+
+        <h4>abdelbassat quaoubai</h4>
+        <p>abquaoub</p>
+      </div>
+      <a href="" ><i class="fas fa-user-plus"></i></a>
+    </section>
+    <section>
+      <img src="../images/abquaoub.jpeg" alt="">
+           <div>
+
+        <h4>abdelbassat quaoubai</h4>
+        <p>abquaoub</p>
+      </div>
+      <a href="" ><i class="fas fa-user-plus"></i></a>
+    </section>
+    <section>
+      <img src="../images/abquaoub.jpeg" alt="">
+           <div>
+
+        <h4>abdelbassat quaoubai</h4>
+        <p>abquaoub</p>
+      </div>
+      <a href="" ><i class="fas fa-user-plus"></i></a>
+    </section>
+  </div>
+  
+  
+</nav>
+
+
+
+
 </div>
+
+
 
 <script src="../js/profile.js" > </script>
 </body>

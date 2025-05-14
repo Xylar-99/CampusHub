@@ -24,6 +24,11 @@ const routes = [
     } ,
     {
         method  : 'GET', 
+        url     : '/profile'  ,
+        handler : getHandlers.getProfileHandler,
+    } ,
+    {
+        method  : 'GET', 
         url     : '/posts'  ,
         handler : getHandlers.getPostsHandler,
     } ,
