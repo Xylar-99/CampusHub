@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Invite Users</title>
+  <style>
+    .user {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .invite-button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- User 1 -->
+  <form class="user" action="/invite" method="POST">
+    <span>Gurdeep Singh</span>
+    <input type="hidden" name="userId" value="1">
+    <button class="invite-button" type="submit">INVITE</button>
+  </form>
+
+  <!-- User 2 -->
+  <form class="user" action="/invite" method="POST">
+    <span>Osahan King</span>
+    <input type="hidden" name="userId" value="2">
+    <button class="invite-button" type="submit">INVITE</button>
+  </form>
+
+  <!-- User 3 -->
+  <form class="user" action="/invite" method="POST">
+    <span>Jimmi Rana</span>
+    <input type="hidden" name="userId" value="3">
+    <button class="invite-button" type="submit">INVITE</button>
+  </form>
+
+</body>
+</html>

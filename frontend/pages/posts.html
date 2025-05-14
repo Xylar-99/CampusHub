@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post Display</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 20px;
+    }
+    .post {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    .post-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 15px;
+    }
+    .post-content {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+    .post-image {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="post">
+    <div class="post-title" id="title">Learning JavaScript</div>
+    <img src="https://via.placeholder.com/600x300" id="img" alt="JavaScript Image" class="post-image">
+    <div class="post-content" id="content">
+      Today I started learning JavaScript. It's really fun to see how I can make websites interactive with just a few lines of code!
+    </div>
+  </div>
+
+  
+  <script>
+      
+      const title = document.getElementById("title");
+      const content = document.getElementById("content");
+      const img = document.getElementById("img");
+      
+      
+      const url = 'http://abquaoub.42.fr:4000/posts';
+      
+      
+      fetch(url)
+      .then(res => res.json())
+      .then(datas => {
+
+        data = datas[1];
+          
+          title.textContent = data.title;
+          content.textContent = data.content;
+          img.src = data.img;
+          
+        })
+        .catch(err => console.log(err))
+        
+        </script>
+</body>
+</html>

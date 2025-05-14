@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Post</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    .post-form {
+      background: #fff;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .post-form h2 {
+      margin-bottom: 15px;
+    }
+    .post-form input[type="text"],
+    .post-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .post-form input[type="file"] {
+      margin: 10px 0;
+    }
+    .post-form button {
+      background: #28a745;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .post-form button:hover {
+      background: #218838;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="post-form">
+    <h2>Create a Post</h2>
+    <form method="post" action="/newPost" enctype="multipart/form-data">
+        
+      <input type="text" name="title" placeholder="Post Title" required>
+      <textarea rows="5" name="content" placeholder="Write your post here..." required></textarea>
+      <input type="file" name="img" accept="image/*">
+      <button type="submit">Post</button>
+    </form>
+  </div>
+
+</body>
+</html>

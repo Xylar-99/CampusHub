@@ -23,6 +23,11 @@ const routes = [
         handler : getHandlers.getUserHandler,
     } ,
     {
+        method  : 'GET', 
+        url     : '/posts'  ,
+        handler : getHandlers.getPostsHandler,
+    } ,
+    {
         method  : 'POST' , 
         url     : '/signup' ,
         handler : postHandlers.postSignHandler,
@@ -39,6 +44,16 @@ const routes = [
         url     : '/user/details' ,
         handler : postHandlers.postDetailsHandler,
         schema  : {schema: {body : authSchemas.detailsSchema}},
+    },
+    {
+        method  : 'POST' , 
+        url     : '/newPost' ,
+        handler : postHandlers.postnewPostHandler,
+    },
+    {
+        method  : 'POST' , 
+        url     : '/invite' ,
+        handler : postHandlers.postInviteHandler,
     }
 
 ]
