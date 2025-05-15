@@ -37,7 +37,7 @@ async function postLoginHandler(req , res)
 
     const token = app.jwt.sign(req.body)
 
-   return res.setCookie('token', token, config.token_config).redirect('/');
+   return res.setCookie('token', token, config.token_config).redirect('/profile');
 }
 
 
@@ -106,6 +106,7 @@ async function postnewPostHandler(req , res)
 
 async function postInviteHandler(req , res)
 {
+    console.log("hello");
     let arr = [];
     
     const data  = {}
@@ -134,7 +135,7 @@ async function postInviteHandler(req , res)
         data.friends_id = arr;
         friends.create(data);
     }
-    return res.redirect('/pages/friends.html')
+    return res.redirect('/')
 }
 
 

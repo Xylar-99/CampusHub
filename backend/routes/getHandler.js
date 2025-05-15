@@ -1,7 +1,8 @@
 const userInfo = require('../models/userDetails');
 const users = require('../utils/fetchUser');
 const posts = require('../models/newPost')
-
+const friends = require('../models/friends')
+const User = require('../models/User')
 async function getRootHandler(req , res) 
 {
     return res.type('text/html').sendFile('index.html')
@@ -64,4 +65,15 @@ async function getPostsHandler(req , res)
 
 
 
-module.exports = {getRootHandler  , getProfileHandler, getPostsHandler ,getUserHandler };
+async function getFriendsHandler(req , res) 
+{
+
+    const data = await  users.getFriends(req);
+
+    return res.send(data);
+}
+
+
+
+
+module.exports = {getRootHandler ,getFriendsHandler , getProfileHandler, getPostsHandler ,getUserHandler };

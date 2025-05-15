@@ -33,6 +33,11 @@ const routes = [
         handler : getHandlers.getPostsHandler,
     } ,
     {
+        method  : 'GET', 
+        url     : '/friends'  ,
+        handler : getHandlers.getFriendsHandler,
+    } ,
+    {
         method  : 'POST' , 
         url     : '/signup' ,
         handler : postHandlers.postSignHandler,
