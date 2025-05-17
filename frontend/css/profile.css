@@ -16,7 +16,7 @@ text-decoration: none;
 .container
 {
     display:grid;
-    grid-template-columns:  1fr;
+    grid-template-columns:  1fr ;
 }
 
 .info-user
@@ -67,17 +67,20 @@ text-decoration: none;
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 16px;
-  color: rgb(37, 37, 37);
+  font-size: 18px;
+  color: rgb(39, 37, 37);
   cursor: pointer;
   transition: background 0.2s ease;
+  
 }
 
-.menu-item i 
+.menu-item i
 {
-  font-size: 23px;
+  font-size: 22px;
   color: rgb(199, 196, 196);
 }
+
+
 .menu-item:hover {
   background-color: #f0f0f0;
 }

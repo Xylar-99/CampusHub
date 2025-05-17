@@ -29,13 +29,23 @@ const routes = [
     } ,
     {
         method  : 'GET', 
+        url     : '/setting'  ,
+        handler : getHandlers.getSettingHandler,
+    } ,
+    {
+        method  : 'GET', 
+        url     : '/login'  ,
+        handler : getHandlers.getLoginHandler,
+    } ,
+    {
+        method  : 'GET', 
         url     : '/posts'  ,
         handler : getHandlers.getPostsHandler,
     } ,
     {
         method  : 'GET', 
-        url     : '/friends'  ,
-        handler : getHandlers.getFriendsHandler,
+        url     : '/users'  ,
+        handler : getHandlers.getUsersHandler,
     } ,
     {
         method  : 'POST' , 

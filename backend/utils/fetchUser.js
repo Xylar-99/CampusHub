@@ -78,4 +78,32 @@ async function getFriends(req)
 }
 
 
-module.exports = {getUserByUsername  , getFriends , getUserByRequest  ,getUserByToken}
+async function getUsers(req) 
+{
+    let arr_of_data = [];
+
+    const my_user = await getUserByRequest(req);
+    const db_users = await profiles.findAll();
+
+    for(let i = 0 ; i < db_users.length ; i++)
+    {
+        const data = {};
+  
+        if(my_user.id != db_users[i].user_id)
+        {
+            const user = await User.findOne({ where: { id: db_users[i].user_id } });
+
+            console.log(user);
+            data.fullName = db_users[i].fullName;
+            data.img = db_users[i].img;
+            data.id = db_users[i].id;
+            data.username = user.username;          
+            arr_of_data.push(data);
+        }
+    }
+    
+    return arr_of_data;
+}
+
+
+module.exports = {getUserByUsername ,getUsers , getFriends , getUserByRequest  ,getUserByToken}
