@@ -12,6 +12,7 @@
 
 // const routes = [
 
+<<<<<<< HEAD
 //     {
 //         method  : 'GET', 
 //         url     : '/'  ,
@@ -75,6 +76,82 @@
 //         url     : '/invite' ,
 //         handler : postHandlers.postInviteHandler,
 //     }
+=======
+    {
+        method  : 'GET', 
+        url     : '/'  ,
+        handler : getHandlers.getRootHandler,
+    } ,
+    {
+        method  : 'GET', 
+        url     : '/profile'  ,
+        handler : getHandlers.getProfileHandler,
+    } ,
+    {
+        method  : 'GET', 
+        url     : '/settings'  ,
+        handler : getHandlers.getSettingHandler,
+    } ,
+    {
+        method  : 'GET', 
+        url     : '/messages'  ,
+        handler : getHandlers.getMessagesHandler,
+    } ,
+    {
+        method  : 'GET', 
+        url     : '/login'  ,
+        handler : getHandlers.getLoginHandler,
+    } ,
+    {
+        method  : 'GET', 
+        url     : '/posts'  ,
+        handler : getHandlers.getPostsHandler,
+    } ,
+    {
+        method  : 'GET', 
+        url     : '/myposts'  ,
+        handler : getHandlers.getMyPostsHandler,
+    } ,
+    {
+        method  : 'GET', 
+        url     : '/users'  ,
+        handler : getHandlers.getUsersHandler,
+    } ,
+    {
+        method  : 'GET', 
+        url     : '/friends'  ,
+        handler : getHandlers.getFriendsHandler,
+    } ,
+    {
+        method  : 'GET', 
+        url     : '/user'  ,
+        handler : getHandlers.getUserHandler,
+    } ,
+    {
+        method  : 'POST' , 
+        url     : '/signup' ,
+        handler : postHandlers.postSignHandler,
+        schema  : {schema: {body : authSchemas.signupSchema}},
+    },
+    {
+        method  : 'POST' , 
+        url     : '/login' ,
+        handler : postHandlers.postLoginHandler,
+        schema  : {schema: {body : authSchemas.loginSchema}},
+    },
+    {
+        method  : 'POST' , 
+        url     : '/user/details' ,
+        handler : postHandlers.postDetailsHandler,
+        schema  : {schema: {body : authSchemas.detailsSchema}},
+    },
+    {
+        method  : 'POST' , 
+        url     : '/newPost' ,
+        handler : postHandlers.postnewPostHandler,
+    },
+
+>>>>>>> 022374aa79de603f157e7f870ec1dcde52d17b03
 
 // ]
 

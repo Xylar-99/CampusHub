@@ -1,11 +1,11 @@
-const User = require('../models/User')
+const prisma = require('../db/db')
 const app = require('../services/server').app
 
-const profiles = require('../models/userDetails')
+
 
 async function getUserByUsername(username)
 {
-    const user = await User.findOne({ where: { username: username } });
+    const user = await prisma.user.findUnique({ where: { username: username } });
 
     return user;
 }
@@ -13,7 +13,7 @@ async function getUserByUsername(username)
 
 async function getUserById(_id)
 {
-    const user = await User.findOne({ where: { id: _id } });
+    const user = await prisma.user.findUnique({ where: { id: _id } });
 
     return user;
 }
@@ -21,9 +21,9 @@ async function getUserById(_id)
 
 async function getProfileById(_id)
 {
-    const user = await profiles.findOne({ where: { user_id: _id } });
+    const profile = await prisma.profile.findUnique({ where: { user_id: _id } });
 
-    return user;
+    return profile;
 }
 
 
@@ -55,7 +55,7 @@ async function getFriends(req)
 
     const my_user = await getUserByRequest(req);
 
-    const db_users = await profiles.findAll();
+    const db_users = await prisma.profile.findMany();
 
     for(let i = 0 ;i  < db_users.length ; i++)
     {
@@ -63,9 +63,8 @@ async function getFriends(req)
   
         if(my_user.id != db_users[i].user_id)
         {
-            const user = await User.findOne({ where: { id: db_users[i].id } });
+            const user = await prisma.user.findUnique({ where: { id: db_users[i].id } });
 
-            console.log(user);
             data.fullName = db_users[i].fullName;
             data.img = db_users[i].img;
             data.id = db_users[i].id;
@@ -82,28 +81,22 @@ async function getUsers(req)
 {
     let arr_of_data = [];
 
-    const my_user = await getUserByRequest(req);
-    const db_users = await profiles.findAll();
+    const user = await getUserByRequest(req);
 
-    for(let i = 0 ; i < db_users.length ; i++)
+    const profiles = await prisma.profile.findMany({where: {  userId: {not: user.id,},},});
+
+
+    console.log(profiles);
+
+    for(let i = 0 ; i < profiles.length ; i++)
     {
-        const data = {};
-  
-        if(my_user.id != db_users[i].user_id)
-        {
-            const user = await User.findOne({ where: { id: db_users[i].user_id } });
-
-            console.log(user);
-            data.fullName = db_users[i].fullName;
-            data.img = db_users[i].img;
-            data.id = db_users[i].id;
-            data.username = user.username;          
-            arr_of_data.push(data);
-        }
+        const user = await prisma.user.findUnique({ where: { id: db_users[i].user_id } });
+        profile.username = user.username;          
+        
     }
     
     return arr_of_data;
 }
 
 
-module.exports = {getUserByUsername ,getUsers , getFriends , getUserByRequest  ,getUserByToken}
+module.exports = {getUserByUsername ,getUsers,getProfileById , getFriends , getUserByRequest  ,getUserByToken}

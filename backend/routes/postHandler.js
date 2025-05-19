@@ -1,25 +1,26 @@
-const app = require('../services/server').app;
-const users = require('../utils/fetchUser') 
-const path = require('path')
+const prisma = require('../db/db')
+const dataUser = require('../utils/fetchUser')
 
+const app = require('../services/server').app;
 const config = require('../controllers/settings')
 
+const path = require('path')
 const util = require('util');
 const pump = util.promisify(require('stream').pipeline);
 const fs = require('fs')
 
-const User = require('../models/User')
-const userInfo = require('../models/userDetails');
-const newPost = require('../models/newPost');
-const friends = require('../models/friends');
-const { where, ARRAY } = require('sequelize');
+
 
 async function postSignHandler(req , res)
 {
     if(Object.values(req.body).includes(''))
         return res.redirect('/');
+    data = 
+    {
+        data:req.body
+    }
 
-    User.create(req.body);
+    await prisma.user.create(data);
     return res.redirect('./pages/login.html');
 }
 
@@ -27,10 +28,12 @@ async function postSignHandler(req , res)
 
 async function postLoginHandler(req , res)
 {
+    const {username } = req.body;
+
     if(Object.values(req.body).includes(''))
         return res.redirect('/login.html');
 
-    const user = await users.getUserByUsername(req.body.username);
+    const user = await prisma.user.findUnique({where : {username : username} });
 
     if(!user || user.password != req.body.password)
         return res.status(400).sendFile('./pages/login.html')
@@ -46,8 +49,7 @@ async function postLoginHandler(req , res)
 async function postDetailsHandler(req , res)
 {
 
-    const user1 = await users.getUserByRequest(req);
-
+    const user1 = await dataUser.getUserByRequest(req);
 
     const data_of_user = {};
     const parts = req.parts();
@@ -65,8 +67,9 @@ async function postDetailsHandler(req , res)
     
     }
     data_of_user.user_id = user1.id;
+    data_of_user.username = user1.username;
 
-    userInfo.create(data_of_user);
+    await prisma.profile.create({data:data_of_user});
     return res.redirect('/')
 }
 
@@ -75,7 +78,7 @@ async function postDetailsHandler(req , res)
 async function postnewPostHandler(req , res)
 {
 
-    const user1 = await users.getUserByRequest(req);
+    const user1 = await dataUser.getUserByRequest(req);
 
 
     const data_of_post = {};
@@ -93,51 +96,49 @@ async function postnewPostHandler(req , res)
             data_of_post[part.fieldname] = part.value;
     
     }
-    data_of_post.user_id = user1.id;
-
-    console.log(data_of_post);
-
-    newPost.create(data_of_post);
-    return res.redirect('/')
+    data_of_post.userId = user1.id;
+    // data_of_post.username = user1.username;
+    await prisma.post.create({data:data_of_post});
+    return res.redirect('/profile')
 }
 
 
 
 
-async function postInviteHandler(req , res)
-{
-    console.log("hello");
-    let arr = [];
+// async function postInviteHandler(req , res)
+// {
+//     console.log("hello");
+//     let arr = [];
     
-    const data  = {}
-    const user = await users.getUserByRequest(req);
-    data.user_id = user.id;
+//     const data  = {}
+//     const user = await dataUser.getUserByRequest(req);
+//     data.user_id = user.id;
 
-    const {userId} = req.body;
+//     const {userId} = req.body;
 
-    const friend = await friends.findOne({ where: { user_id: data.user_id } });
-
-
-    if(friend)
-    {
-        if(friend.friends_id.includes(userId) == false)
-        {
-            arr = friend.friends_id;
-            arr.push(userId);
-            await friends.update({friends_id : arr} , {where : {user_id:user.id}})
-        }
-        else
-            console.log("You're already connected with this friend.");
-    }
-    else
-    {
-        arr.push(userId);
-        data.friends_id = arr;
-        friends.create(data);
-    }
-    return res.redirect('/')
-}
+//     const friend = await prisma.friend.findUnique({ where: { user_id: data.user_id } });
 
 
+//     if(friend)
+//     {
+//         if(friend.friendsId.includes(userId) == false)
+//         {
+//             arr = friend.friendsId;
+//             arr.push(userId);
+//             await friends.update({friendsId : arr} , {where : {user_id:user.id}})
+//         }
+//         else
+//             console.log("You're already connected with this friend.");
+//     }
+//     else
+//     {
+//         arr.push(userId);
+//         data.friendsId = arr;
+//         friends.create(data);
+//     }
+//     return res.redirect('/')
+// }
 
-module.exports = {postSignHandler , postInviteHandler , postnewPostHandler , postDetailsHandler , postLoginHandler}
+
+
+module.exports = {postSignHandler ,postDetailsHandler , postnewPostHandler ,postLoginHandler}
