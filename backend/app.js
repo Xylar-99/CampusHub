@@ -19,18 +19,18 @@ const routes = [
     } ,
     {
         method  : 'GET', 
-        url     : '/user'  ,
-        handler : getHandlers.getUserHandler,
-    } ,
-    {
-        method  : 'GET', 
         url     : '/profile'  ,
         handler : getHandlers.getProfileHandler,
     } ,
     {
         method  : 'GET', 
-        url     : '/setting'  ,
+        url     : '/settings'  ,
         handler : getHandlers.getSettingHandler,
+    } ,
+    {
+        method  : 'GET', 
+        url     : '/messages'  ,
+        handler : getHandlers.getMessagesHandler,
     } ,
     {
         method  : 'GET', 
@@ -44,8 +44,23 @@ const routes = [
     } ,
     {
         method  : 'GET', 
+        url     : '/myposts'  ,
+        handler : getHandlers.getMyPostsHandler,
+    } ,
+    {
+        method  : 'GET', 
         url     : '/users'  ,
         handler : getHandlers.getUsersHandler,
+    } ,
+    {
+        method  : 'GET', 
+        url     : '/friends'  ,
+        handler : getHandlers.getFriendsHandler,
+    } ,
+    {
+        method  : 'GET', 
+        url     : '/user'  ,
+        handler : getHandlers.getUserHandler,
     } ,
     {
         method  : 'POST' , 
@@ -70,11 +85,7 @@ const routes = [
         url     : '/newPost' ,
         handler : postHandlers.postnewPostHandler,
     },
-    {
-        method  : 'POST' , 
-        url     : '/invite' ,
-        handler : postHandlers.postInviteHandler,
-    }
+
 
 ]
 
