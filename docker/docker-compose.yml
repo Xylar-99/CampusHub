@@ -1,20 +1,30 @@
 version: "3.9"
 
 services:
-  user:
-    build: ../backend/services/user
-    image: user-image
-    container_name: user-service
+
+  gateway:
+    build: ../backend/gateway
+    image: gateway-image
+    container_name: gateway
     ports:
       - "4000:4000"
     networks:
-        - inception
+        - ft_tr
+    volumes:
+        - ../frontend:/var/www/html/frontend
+  user:
+    build: ../backend/services/user
+    image: user-image
+    container_name: user
+    ports:
+      - "4001:4001"
+    networks:
+        - ft_tr
     volumes:
         - ../frontend:/var/www/html/frontend
 
-
 networks:
-  inception:
+  ft_tr:
     driver: bridge
 
   

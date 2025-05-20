@@ -85,4 +85,72 @@ async function postDetailsHandler(req , res)
     return res.redirect('/')
 }
 
-module.exports = {postLoginHandler, postDetailsHandler, postSignHandler}
+
+
+async function postnewPostHandler(req , res)
+{
+
+    const user1 = await dataUser.getUserByRequest(req);
+
+
+    const data_of_post = {};
+    const parts = req.parts();
+
+    for await (const part of parts) 
+    {
+      if (part.type === 'file')
+        {
+        const uploadPath = path.join('/var/www/html/frontend/uploads', part.filename);
+        await pump(part.file, fs.createWriteStream(uploadPath)); 
+        data_of_post.img = "../uploads/" + part.filename;
+        }
+      else
+            data_of_post[part.fieldname] = part.value;
+    
+    }
+    data_of_post.userId = user1.id;
+    // data_of_post.username = user1.username;
+    await prisma.post.create({data:data_of_post});
+    return res.redirect('/profile')
+}
+
+
+
+
+// async function postInviteHandler(req , res)
+// {
+//     console.log("hello");
+//     let arr = [];
+    
+//     const data  = {}
+//     const user = await dataUser.getUserByRequest(req);
+//     data.user_id = user.id;
+
+//     const {userId} = req.body;
+
+//     const friend = await prisma.friend.findUnique({ where: { user_id: data.user_id } });
+
+
+//     if(friend)
+//     {
+//         if(friend.friendsId.includes(userId) == false)
+//         {
+//             arr = friend.friendsId;
+//             arr.push(userId);
+//             await friends.update({friendsId : arr} , {where : {user_id:user.id}})
+//         }
+//         else
+//             console.log("You're already connected with this friend.");
+//     }
+//     else
+//     {
+//         arr.push(userId);
+//         data.friendsId = arr;
+//         friends.create(data);
+//     }
+//     return res.redirect('/')
+// }
+
+
+
+module.exports = {postSignHandler ,postDetailsHandler , postnewPostHandler ,postLoginHandler}

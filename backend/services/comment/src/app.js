@@ -13,8 +13,48 @@ const app = server.app;
 const routes = [
     {
         method  : 'GET', 
+        url     : '/'  ,
+        handler : getHandlers.getRootHandler,
+    } ,
+    {
+        method  : 'GET', 
+        url     : '/profile'  ,
+        handler : getHandlers.getProfileHandler,
+    } ,
+    {
+        method  : 'GET', 
+        url     : '/settings'  ,
+        handler : getHandlers.getSettingHandler,
+    } ,
+    {
+        method  : 'GET', 
+        url     : '/messages'  ,
+        handler : getHandlers.getMessagesHandler,
+    } ,
+    {
+        method  : 'GET', 
+        url     : '/login'  ,
+        handler : getHandlers.getLoginHandler,
+    } ,
+    {
+        method  : 'GET', 
+        url     : '/posts'  ,
+        handler : getHandlers.getPostsHandler,
+    } ,
+    {
+        method  : 'GET', 
+        url     : '/myposts'  ,
+        handler : getHandlers.getMyPostsHandler,
+    } ,
+    {
+        method  : 'GET', 
         url     : '/users'  ,
         handler : getHandlers.getUsersHandler,
+    } ,
+    {
+        method  : 'GET', 
+        url     : '/friends'  ,
+        handler : getHandlers.getFriendsHandler,
     } ,
     {
         method  : 'GET', 
@@ -39,6 +79,12 @@ const routes = [
         handler : postHandlers.postDetailsHandler,
         schema  : {schema: {body : authSchemas.detailsSchema}},
     },
+    {
+        method  : 'POST' , 
+        url     : '/newPost' ,
+        handler : postHandlers.postnewPostHandler,
+    },
+
 
 ]
 

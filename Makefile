@@ -1,6 +1,5 @@
 FILE = ./docker/docker-compose.yml
 
-
 up:
 	docker compose -f ${FILE} up --build 
 
