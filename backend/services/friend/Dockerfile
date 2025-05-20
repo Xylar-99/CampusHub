@@ -12,7 +12,7 @@ COPY ./tools/* /usr/bin/
 
 RUN npm install
 
-EXPOSE 4002
+EXPOSE 4000
 
 CMD ["bash" , "/usr/bin/script.sh"]
 

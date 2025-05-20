@@ -1,5 +1,6 @@
 
 const nodemailer = require('nodemailer');
+const SendmailTransport = require('nodemailer/lib/sendmail-transport');
 
 
 
@@ -28,6 +29,8 @@ function sendMail(options)
     {
         if(err)
             console.log(err)
+        // else
+        //     console.log(info)
     });
 
 }

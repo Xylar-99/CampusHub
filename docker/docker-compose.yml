@@ -9,22 +9,22 @@ services:
     ports:
       - "4000:4000"
     networks:
-        - ft_tr
+        - web
     volumes:
         - ../frontend:/var/www/html/frontend
   user:
     build: ../backend/services/user
     image: user-image
     container_name: user
-    ports:
-      - "4001:4001"
+    expose:
+      - 4001
     networks:
-        - ft_tr
+        - web
     volumes:
         - ../frontend:/var/www/html/frontend
 
 networks:
-  ft_tr:
+  web:
     driver: bridge
 
   

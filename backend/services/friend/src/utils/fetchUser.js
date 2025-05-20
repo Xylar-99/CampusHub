@@ -11,6 +11,13 @@ async function getUserByUsername(username)
 }
 
 
+async function getUserById(_id)
+{
+    const user = await prisma.user.findUnique({ where: { id: _id } });
+
+    return user;
+}
+
 
 async function getProfileById(_id)
 {
@@ -42,6 +49,33 @@ async function getUserByRequest(req)
 }
 
 
+async function getFriends(req) 
+{
+    let arr_of_data = [];
+
+    const my_user = await getUserByRequest(req);
+
+    const db_users = await prisma.profile.findMany();
+
+    for(let i = 0 ;i  < db_users.length ; i++)
+    {
+        const data = {};
+  
+        if(my_user.id != db_users[i].user_id)
+        {
+            const user = await prisma.user.findUnique({ where: { id: db_users[i].id } });
+
+            data.fullName = db_users[i].fullName;
+            data.img = db_users[i].img;
+            data.id = db_users[i].id;
+            data.username = user.username;          
+            arr_of_data.push(data);
+        }
+    }
+    
+    return arr_of_data;
+}
+
 
 async function getUsers(req) 
 {
@@ -65,4 +99,4 @@ async function getUsers(req)
 }
 
 
-module.exports = {getUserByUsername , getUsers, getProfileById  , getUserByRequest  ,getUserByToken}
+module.exports = {getUserByUsername ,getUsers,getProfileById , getFriends , getUserByRequest  ,getUserByToken}

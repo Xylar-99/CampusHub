@@ -4,15 +4,6 @@ const prisma = require('../db/db')
 const dataUser = require('../utils/fetchUser')
 
 
-// get my user
-async function getUserHandler(req , res) 
-{
-    const user = await dataUser.getUserByRequest(req);
-    const profile = await prisma.profile.findUnique({where : {user_id : user.id}});
-
-    return res.send(profile);
-}
-
 // get all posts
 async function getPostsHandler(req , res) 
 {
@@ -37,6 +28,4 @@ async function getMyPostsHandler(req , res)
 }
 
 
-
-
-module.exports = {getMyPostsHandler , getPostsHandler };
+module.exports = { getMyPostsHandler , getPostsHandler };

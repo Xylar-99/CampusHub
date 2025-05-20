@@ -2,6 +2,8 @@ const server = require('./services/server')
 const getHandlers = require('./routes/getHandler')
 const postHandlers = require('./routes/postHandler')
 const routeUtils = require('./utils/serverUtils')
+const authSchemas = require('./controllers/authSchemas')
+
 
 require('./controllers/pluginRegister')(); 
 

@@ -34,32 +34,3 @@ model Profile {
   @@map("profiles")
 }
 
-
-model Post {
-  id      Int    @id @default(autoincrement())
-  userId  Int
-  img     String
-  title   String
-  content String
-
-  @@map("posts")
-}
-
-
-model Friend {
-  id         Int      @id @default(autoincrement())
-  userId     Int      @unique
-  friendsId  Json?
-
-  @@map("friends")
-}
-
-
-model Message {
-  id        Int       @id @default(autoincrement())
-  userId    Int       
-  friendId  Int
-  msg       String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}

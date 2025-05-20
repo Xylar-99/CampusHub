@@ -9,7 +9,6 @@ const fs = require('fs')
 
 
 
-
 async function postnewPostHandler(req , res)
 {
 
@@ -28,7 +27,7 @@ async function postnewPostHandler(req , res)
         data_of_post.img = "../uploads/" + part.filename;
         }
       else
-          data_of_post[part.fieldname] = part.value;
+            data_of_post[part.fieldname] = part.value;
     
     }
     data_of_post.userId = user1.id;
@@ -37,4 +36,4 @@ async function postnewPostHandler(req , res)
 }
 
 
-module.exports = {postnewPostHandler}
+module.exports = {postnewPostHandler }
