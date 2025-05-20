@@ -2,8 +2,6 @@ const server = require('./services/server')
 const getHandlers = require('./routes/getHandler')
 const postHandlers = require('./routes/postHandler')
 const routeUtils = require('./utils/serverUtils')
-const authSchemas = require('./controllers/authSchemas')
-
 
 require('./controllers/pluginRegister')(); 
 
@@ -17,7 +15,7 @@ const routes = [
         handler : getHandlers.getUsersHandler,
     } ,
     {
-        method  : 'GET', 
+        method  : 'GET'    , 
         url     : '/user'  ,
         handler : getHandlers.getUserHandler,
     } ,
@@ -25,19 +23,16 @@ const routes = [
         method  : 'POST' , 
         url     : '/signup' ,
         handler : postHandlers.postSignHandler,
-        schema  : {schema: {body : authSchemas.signupSchema}},
     },
     {
         method  : 'POST' , 
         url     : '/login' ,
         handler : postHandlers.postLoginHandler,
-        schema  : {schema: {body : authSchemas.loginSchema}},
     },
     {
         method  : 'POST' , 
         url     : '/user/details' ,
         handler : postHandlers.postDetailsHandler,
-        schema  : {schema: {body : authSchemas.detailsSchema}},
     },
 
 ]

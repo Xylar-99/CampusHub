@@ -13,4 +13,4 @@ function handleDataChange(route)
 }
 
 
-module.exports = {handleDataChange}
+module.exports = handleDataChange

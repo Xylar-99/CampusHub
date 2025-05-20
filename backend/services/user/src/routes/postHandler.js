@@ -22,15 +22,18 @@ const mailOptions = {
 
 async function postSignHandler(req , res)
 {
-    if(Object.values(req.body).includes(''))
-        return res.redirect('/');
-    data = 
-    {
-        data:req.body
-    }
 
-    await prisma.user.create(data);
-    return res.redirect('./pages/login.html');
+
+
+    // data = 
+    // {
+    //     data:req.body
+    // }
+
+    // await prisma.user.create(data);
+  console.log(req.body);
+
+    return res.send(req.body);
 }
 
 

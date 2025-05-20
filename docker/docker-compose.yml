@@ -20,8 +20,8 @@ services:
       - 4001
     networks:
         - web
-    volumes:
-        - ../frontend:/var/www/html/frontend
+
+
 
 networks:
   web:
