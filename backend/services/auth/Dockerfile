@@ -1,4 +1,4 @@
-FROM node:18.19-slim
+FROM node:20
 
 RUN apt-get update && apt-get install -y openssl libssl-dev
 
@@ -12,7 +12,7 @@ COPY ./tools/* /usr/bin/
 
 RUN npm install
 
-EXPOSE 4000
+EXPOSE 4002
 
 CMD ["bash" , "/usr/bin/script.sh"]
 

@@ -1,6 +1,6 @@
-FROM node:18.19-slim
+FROM node:20
 
-RUN apt-get update && apt-get install -y openssl sqlite3 libssl-dev
+RUN apt-get update  -y && apt-get install -y openssl sqlite3 libssl-dev
 
 WORKDIR /user
 
@@ -15,4 +15,3 @@ RUN npm install
 EXPOSE 4001
 
 CMD ["bash" , "/usr/bin/script.sh"]
-

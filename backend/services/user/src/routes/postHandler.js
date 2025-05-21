@@ -10,52 +10,47 @@ const pump = util.promisify(require('stream').pipeline);
 const fs = require('fs')
 
 
-const sendMail = require('../utils/mailer')
+// const sendMail = require('../utils/mailer')
 
-const mailOptions = {
-  from: 'abdoqoubai@gmail.com',
-  to: 'aquaoubai@gmail.com',
-  subject: 'Hello from Node.js',
-  text: 'This is a test email sent from Node.js using Nodemailer!',
-};
+// const mailOptions = {
+//   from: 'abdoqoubai@gmail.com',
+//   to: 'aquaoubai@gmail.com',
+//   subject: 'Hello from Node.js',
+//   text: 'This is a test email sent from Node.js using Nodemailer!',
+// };
 
 
 async function postSignHandler(req , res)
 {
+  data = {  data:req.body }
+  await prisma.user.create(data);
 
-
-
-    // data = 
-    // {
-    //     data:req.body
-    // }
-
-    // await prisma.user.create(data);
-  console.log(req.body);
-
-    return res.send(req.body);
+  return res.send(req.body);
 }
 
 
 
 async function postLoginHandler(req , res)
 {
-    const {username } = req.body;
 
-    if(Object.values(req.body).includes(''))
-        return res.redirect('/login.html');
+  console.log(req);
+  // const {username } = req.body;
+  // const user = await prisma.user.findUnique({where : {username : username} });
 
-    const user = await prisma.user.findUnique({where : {username : username} });
+  // if(!user || user.password != req.body.password)
+  //   return res.send({error:"incorect password!!"})
 
-    if(!user || user.password != req.body.password)
-        return res.status(400).sendFile('./pages/login.html')
 
-    mailOptions.to = user.email;
-    mailOptions.text = "code validiton : 4h3j67";
-    sendMail(mailOptions);
-    const token = app.jwt.sign(req.body)
+  // const response = await fetch('http://auth:4002/token/create', {
+  //   method: 'POST',
+  //   headers: { 'Content-Type': 'application/json' },
+  //   body:  JSON.stringify(req.body),
+  // });
 
-   return res.setCookie('token', token, config.token_config).redirect('/profile');
+  const token = "await response.json()";
+
+  console.log(token)
+  return res.send(token)
 }
 
 

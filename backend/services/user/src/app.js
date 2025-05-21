@@ -10,16 +10,6 @@ const app = server.app;
 
 const routes = [
     {
-        method  : 'GET', 
-        url     : '/users'  ,
-        handler : getHandlers.getUsersHandler,
-    } ,
-    {
-        method  : 'GET'    , 
-        url     : '/user'  ,
-        handler : getHandlers.getUserHandler,
-    } ,
-    {
         method  : 'POST' , 
         url     : '/signup' ,
         handler : postHandlers.postSignHandler,
@@ -29,12 +19,6 @@ const routes = [
         url     : '/login' ,
         handler : postHandlers.postLoginHandler,
     },
-    {
-        method  : 'POST' , 
-        url     : '/user/details' ,
-        handler : postHandlers.postDetailsHandler,
-    },
-
 ]
 
 
