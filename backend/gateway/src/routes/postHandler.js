@@ -1,4 +1,6 @@
 
+const config_token = require('../controllers/settings')
+
 // const sendMail = require('../utils/mailer')
 
 // const mailOptions = {
@@ -30,22 +32,28 @@ async function postSignHandler(req , res)
 
 async function postLoginHandler(req , res)
 {
-  //   const {username } = req.body;
+  // if(Object.values(req.body).includes(''))
+  //     return res.redirect('/');
 
-  //   if(Object.values(req.body).includes(''))
-  //       return res.redirect('/login.html');
+  const tokenGoogle = await this.googleOAuth2.getAccessTokenFromAuthorizationCodeFlow(req);
 
-  //   const user = await prisma.user.findUnique({where : {username : username} });
+    const userRes = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
+    headers: {
+      Authorization: `Bearer ${tokenGoogle.token.access_token}`,
+    },
+  });
 
-  //   if(!user || user.password != req.body.password)
-  //       return res.status(400).sendFile('./pages/login.html')
+  const profile = await userRes.json();
 
-  //   mailOptions.to = user.email;
-  //   mailOptions.text = "code validiton : 4h3j67";
-  //   sendMail(mailOptions);
-  //   const token = app.jwt.sign(req.body)
+  const response = await fetch('http://user:4001/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body:  JSON.stringify(profile),
+  });
 
-  //  return res.setCookie('token', token, config.token_config).redirect('/profile');
+  const token = await response.json();
+
+  return res.setCookie('token', token, config_token.token_config).send({token : token});
 }
 
 

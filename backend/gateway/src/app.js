@@ -20,6 +20,16 @@ const routes = [
         url     : '/user'  ,
         handler : getHandlers.getUserHandler,
     } ,
+    // {
+    //     method : 'GET' , 
+    //     url     : '/auth/google' ,
+    //     handler : getHandlers.getAuthGooglehandler,
+    // },
+     {
+        method : 'GET' , 
+        url     : '/auth/google/callback' ,
+        handler : getHandlers.getCallbackhandler,
+    },
     {
         method  : 'POST' , 
         url     : '/signup' ,
@@ -27,10 +37,9 @@ const routes = [
         schema  : {schema: {body : authSchemas.signupSchema}},
     },
     {
-        method  : 'POST' , 
-        url     : '/login' ,
+        method  : 'GET' , 
+        url     : '/login/google' ,
         handler : postHandlers.postLoginHandler,
-        schema  : {schema: {body : authSchemas.loginSchema}},
     },
 ]
 

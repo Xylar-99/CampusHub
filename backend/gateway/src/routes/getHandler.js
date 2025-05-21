@@ -1,4 +1,5 @@
 
+const app = require('../services/server').app
 
 
 async function getRootHandler(req , res) 
@@ -7,35 +8,6 @@ async function getRootHandler(req , res)
 }
 
 
-
-
-// async function getProfileHandler(req , res) 
-// {
-//    return res.sendFile('./pages/profile.html')
-// }
-
-
-// async function getSettingHandler(req , res) 
-// {
-//    return res.sendFile('./pages/comp.html')
-// }
-
-
-// async function getLoginHandler(req , res) 
-// {
-//    return res.sendFile('./pages/login.html')
-// }
-
-
-// async function getMessagesHandler(req , res) 
-// {
-//    return res.sendFile('./pages/message.html')
-// }
-
-
-
-// //  API 
-
 // // get my user
 async function getUserHandler(req , res) 
 {
@@ -43,63 +15,42 @@ async function getUserHandler(req , res)
     return res.send(respond);
 }
 
-// // get all posts
-// async function getPostsHandler(req , res) 
-// {
-//     const posts = await prisma.post.findMany();
-//     for(let i = 0 ; i < posts.length ; i++)
-//     {
-//         const profile = await prisma.profile.findUnique({where : {user_id : posts[i].userId}})
-//         posts[i].img_user = profile.img;
-//         posts[i].fullName    = profile.fullName;
-//     }
-//     return res.send(posts);
-// }
 
-// // get all my posts
 
-// async function getMyPostsHandler(req , res) 
-// {
-//     const my_user = dataUser.getUserByRequest(req);
-//     const posts = await prisma.post.findMany({where : {userId : my_user.id}})
+async function getAuthGooglehandler(req , res) 
+{
 
-//     return res.send(posts);
-// }
+  const redirectUrl = `https://accounts.google.com/o/oauth2/v2/auth?` +
+    `client_id=676952011207-ejdkepng7ovdfqmb109ingsgda5oncgb.apps.googleusercontent.com` +
+    `&redirect_uri=http://abquaoub.42.fr:4000/auth/google/callback` +
+    `&response_type=code` +
+    `&scope=openid%20email%20profile` +
+    `&access_type=offline` +
+    `&prompt=consent`;
+    
+  res.redirect(redirectUrl);
+}
 
-// // get all my friends
-// async function getFriendsHandler(req , res) 
-// {
-//     const my_user = dataUser.getUserByRequest(req);
-//     const friends = await prisma.friend.findUnique({where : {userId : my_user.id}})
 
-//     const users = await prisma.user.findMany({
-//     where: {
-//     userId: {
-//       in: friends.friendsId,
-//     },
-//     },
-//     });
+async function getCallbackhandler(req , res) 
+{
 
-//     return res.send(users);
-// }
+  const token = await this.googleOAuth2.getAccessTokenFromAuthorizationCodeFlow(req);
 
-// // get all users in database
-// async function getUsersHandler(req , res) 
-// {
-//     const myUser = await dataUser.getUserByRequest(req);
-//     const users = await  prisma.profile.findMany({
-//     where: {
-//     user_id: {
-//       not: myUser.id,
-//     },
-//     },
-//     });
+  const result = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
+    headers: {
+      Authorization: `Bearer ${token.token.access_token}`
+    }
+  });
 
-//     return res.send(users);
-// }
+
+  const user = await result.json();
+
+
+  res.send(user);
+    
+}
 
 
 
-
-module.exports = {getRootHandler , getUserHandler }
-//  , getMessagesHandler , getMyPostsHandler, getUsersHandler ,getLoginHandler, getSettingHandler ,getFriendsHandler , getProfileHandler, getPostsHandler ,getUserHandler };
+module.exports = {getRootHandler  , getCallbackhandler  , getAuthGooglehandler, getUserHandler }
