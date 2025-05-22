@@ -52,18 +52,17 @@ const auth2_config = {
 
 async function registerPlugins()
 {
-  
-  // fastify.app.register(require('@fastify/session'), {
-  //   secret: 'abquaoub', 
-  //   cookie: {
-  //     secure: false, 
-  //     maxAge: 1000 * 60 * 10,
-  //   },
-  //   saveUninitialized: false,
-  // });
+  fastify.app.register(cookie);
+  fastify.app.register(require('@fastify/session'), {
+    secret: 'this_is_a_very_long_secret_key_that_is_secure',
+    cookie: {
+    secure: false, 
+    maxAge: 1000 * 60 * 10,
+    },
+    saveUninitialized: false,
+  });
   fastify.app.register(fastifyStatic, fastifyStatic_config);
   fastify.app.register(jwt, jwt_config);
-  fastify.app.register(cookie);
   fastify.app.register(multipart , multipart_config);
   fastify.app.register(formbody);
   fastify.app.register(auth2 , auth2_config);

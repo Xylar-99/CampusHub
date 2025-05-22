@@ -12,7 +12,7 @@ RUN npm install
 
 RUN npm install @fastify/oauth2
 
-# RUN npm install @fastify/session
+RUN npm install @fastify/session
 
 EXPOSE 4000
 

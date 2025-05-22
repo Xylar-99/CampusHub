@@ -24,6 +24,7 @@ async function postSignLocalHandler(req , res)
   
   body_data.auth_provider = 'local';
   body_data.ver_code      = 545;
+  console.log(body_data)
   data = { data:body_data }
   const respond = {};
   try
@@ -77,7 +78,20 @@ async function postSignGoogleHandler(req , res)
   return res.send(token);
 }
 
+async function postVerifyHandler(req , res) 
+{
+  const {email , code} = req.body;
+  const user = await prisma.user.findUnique({where : {email : email} });
 
+  console.log(user);
+
+  console.log(typeof user.ver_code , typeof code , user.ver_code != code)
+  if(user.ver_code != code)
+    return res.send({verify : 'no'})
+  
+  
+  return res.send({verify : 'yes'})
+}
 
 async function postLoginHandler(req , res)
 {
@@ -139,4 +153,4 @@ async function postDetailsHandler(req , res)
     return res.redirect('/')
 }
 
-module.exports = {postLoginHandler,  postSignLocalHandler, postDetailsHandler, postSignGoogleHandler}
+module.exports = {postLoginHandler, postVerifyHandler ,  postSignLocalHandler, postDetailsHandler, postSignGoogleHandler}

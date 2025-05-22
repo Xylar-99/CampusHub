@@ -24,6 +24,11 @@ const routes = [
         url     : '/login' ,
         handler : postHandlers.postLoginHandler,
     },
+    {
+        method  : 'POST' , 
+        url     : '/verify' ,
+        handler : postHandlers.postVerifyHandler,
+    },
 ]
 
 
