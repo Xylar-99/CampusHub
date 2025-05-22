@@ -6,7 +6,7 @@ async function postSignHandler(req , res)
   if(Object.values(req.body).includes(''))
     return res.redirect('/');
 
-  req.session.set('email', req.body.email)
+  // req.session.set('email', req.body.email)
 
   const response = await fetch('http://user:4001/signup/local', {
     method: 'POST',
@@ -23,7 +23,7 @@ async function postSignHandler(req , res)
 async function postverificationHandler(req , res) 
 {
   const {code } = req.body;
-  const email = req.session.get('email');
+  // const email = req.session.get('email');
 
   console.log(email);
   console.log(code);

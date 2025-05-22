@@ -1,4 +1,4 @@
-FROM node:18.19-slim
+FROM node:20
 
 RUN apt-get update && apt-get install -y openssl libssl-dev
 
@@ -12,7 +12,7 @@ RUN npm install
 
 RUN npm install @fastify/oauth2
 
-RUN npm install @fastify/session
+# RUN npm install @fastify/session
 
 EXPOSE 4000
 
