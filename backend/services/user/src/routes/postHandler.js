@@ -13,17 +13,17 @@ const mailOptions = {
   from: 'abdoqoubai@gmail.com',
   to: 'aquaoubai@gmail.com',
   subject: 'hii',
-  text: '545',
+  text: '455',
 };
 
 
 async function postSignLocalHandler(req , res)
 {
   const body_data = req.body;
-
+  const randomNumber = Math.floor(Math.random() * 900000) + 100000;
   
   body_data.auth_provider = 'local';
-  body_data.ver_code      = 545;
+  body_data.ver_code      = randomNumber;
   console.log(body_data)
   data = { data:body_data }
   const respond = {};
@@ -31,6 +31,7 @@ async function postSignLocalHandler(req , res)
   {
     await prisma.user.create(data);
     mailOptions.to = body_data.email
+    mailOptions.text = String(randomNumber);
     sendMail(mailOptions)
     respond.check = 'yes';
   }

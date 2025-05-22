@@ -37,9 +37,8 @@ async function postverificationHandler(req , res)
 
   const result = await response.json();
 
-  console.log(result);
-  // console.log(email);
-  // console.log(code);
+  if(result.verify == 'no')
+    return res.redirect('/verification')
   return res.redirect('/login')
 }
 
