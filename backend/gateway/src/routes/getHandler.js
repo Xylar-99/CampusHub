@@ -10,12 +10,16 @@ async function getRootHandler(req , res)
 
 
 
+async function getverificationpHandler(req , res) 
+{
+    return res.type('text/html').sendFile('./pages/verification.html')
+}
+
+
 async function getSignupHandler(req , res) 
 {
     return res.type('text/html').sendFile('./pages/signup.html')
 }
-
-
 
 async function getLoginHandler(req , res) 
 {
@@ -57,4 +61,4 @@ async function getCallbackhandler(req , res)
 
 
 
-module.exports = {getRootHandler , getLoginHandler   ,getSignupHandler  , getCallbackhandler, getUserHandler }
+module.exports = {getRootHandler , getLoginHandler , getverificationpHandler  ,getSignupHandler  , getCallbackhandler, getUserHandler }

@@ -8,11 +8,9 @@ COPY ./src/ .
 
 COPY ./config/package.json .
 
-COPY ./tools/* /usr/bin/
-
 RUN npm install
 
 EXPOSE 4002
 
-CMD ["bash" , "/usr/bin/script.sh"]
+CMD ["npm" , "run" , "start"]
 

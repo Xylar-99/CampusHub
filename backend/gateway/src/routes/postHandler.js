@@ -4,7 +4,9 @@ const config_token = require('../controllers/settings')
 async function postSignHandler(req , res)
 {
   if(Object.values(req.body).includes(''))
-      return res.redirect('/');
+    return res.redirect('/');
+
+  req.session.set('email', req.body.email)
 
   const response = await fetch('http://user:4001/signup/local', {
     method: 'POST',
@@ -15,10 +17,18 @@ async function postSignHandler(req , res)
   const result = await response.json();
   if(result.check == 'no')
     return res.redirect('/signup')
-  return res.redirect('/login')
+  return res.redirect('/verification')
 }
 
+async function postverificationHandler(req , res) 
+{
+  const {code } = req.body;
+  const email = req.session.get('email');
 
+  console.log(email);
+  console.log(code);
+  return res.redirect('/login')
+}
 
 async function postLoginHandler(req , res)
 {
@@ -39,4 +49,4 @@ async function postLoginHandler(req , res)
 
 
 
-module.exports = {postSignHandler ,postLoginHandler}
+module.exports = {postSignHandler, postverificationHandler ,postLoginHandler}

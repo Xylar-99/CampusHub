@@ -17,6 +17,11 @@ const routes = [
     } ,
     {
         method  : 'GET', 
+        url     : '/verification'  ,
+        handler : getHandlers.getverificationpHandler,
+    } ,
+    {
+        method  : 'GET', 
         url     : '/signup'  ,
         handler : getHandlers.getSignupHandler,
     } ,
@@ -35,6 +40,11 @@ const routes = [
         url     : '/signup' ,
         handler : postHandlers.postSignHandler,
         schema  : {schema: {body : authSchemas.signupSchema}},
+    },
+    {
+        method  : 'POST' , 
+        url     : '/verification' ,
+        handler : postHandlers.postverificationHandler,
     },
     {
         method  : 'POST' , 

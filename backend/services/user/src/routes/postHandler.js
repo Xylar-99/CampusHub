@@ -21,7 +21,9 @@ async function postSignLocalHandler(req , res)
 {
   const body_data = req.body;
 
+  
   body_data.auth_provider = 'local';
+  body_data.ver_code      = 545;
   data = { data:body_data }
   const respond = {};
   try
