@@ -1,31 +1,78 @@
 const prisma = require('../db/db')
 const dataUser = require('../utils/fetchUser')
 
-const app = require('../services/server').app;
-const config = require('../controllers/settings')
-
 const path = require('path')
 const util = require('util');
 const pump = util.promisify(require('stream').pipeline);
 const fs = require('fs')
 
 
-// const sendMail = require('../utils/mailer')
+const sendMail = require('../utils/mailer')
 
-// const mailOptions = {
-//   from: 'abdoqoubai@gmail.com',
-//   to: 'aquaoubai@gmail.com',
-//   subject: 'Hello from Node.js',
-//   text: 'This is a test email sent from Node.js using Nodemailer!',
-// };
+const mailOptions = {
+  from: 'abdoqoubai@gmail.com',
+  to: 'aquaoubai@gmail.com',
+  subject: 'hii',
+  text: '545',
+};
 
 
-async function postSignHandler(req , res)
+async function postSignLocalHandler(req , res)
 {
-  data = {  data:req.body }
-  await prisma.user.create(data);
+  const body_data = req.body;
 
-  return res.send(req.body);
+  body_data.auth_provider = 'local';
+  data = { data:body_data }
+  const respond = {};
+  try
+  {
+    await prisma.user.create(data);
+    mailOptions.to = body_data.email
+    sendMail(mailOptions)
+    respond.check = 'yes';
+  }
+  catch(error)
+  {
+    console.log("ready exist")
+    respond.check = 'no';
+  }
+  return res.send(respond);
+}
+
+
+async function postSignGoogleHandler(req , res)
+{
+  const respond = {};
+  const body_data = {}
+  body_data['name'] = req.body.name;
+  body_data['email'] = req.body.email;
+  body_data['password'] = '';
+  body_data['auth_provider']   = 'google';
+
+  data = { data:body_data }
+
+
+  const response = await fetch('http://auth:4002/token/create', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body:  JSON.stringify(body_data.email),
+  });
+  
+  const token = await response.json();
+
+  try
+  {
+    await prisma.user.create(data);
+    respond.check = 'yes';
+    
+  }
+  catch(error)
+  {
+    respond.check = 'no';
+  }
+  
+  console.log(token);
+  return res.send(token);
 }
 
 
@@ -33,24 +80,31 @@ async function postSignHandler(req , res)
 async function postLoginHandler(req , res)
 {
 
-  console.log(req);
-  // const {username } = req.body;
-  // const user = await prisma.user.findUnique({where : {username : username} });
+  try 
+  {
 
-  // if(!user || user.password != req.body.password)
-  //   return res.send({error:"incorect password!!"})
+  const {email} = req.body;
+  const user = await prisma.user.findUnique({where : {email : email} });
 
+  if(!user || user.password != req.body.password)
+    return res.send({error:"incorect password!!"})
 
-  // const response = await fetch('http://auth:4002/token/create', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body:  JSON.stringify(req.body),
-  // });
-
-  const token = "await response.json()";
-
-  console.log(token)
-  return res.send(token)
+  const response = await fetch('http://auth:4002/token/create', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body:  JSON.stringify(email),
+  });
+  
+  const token = await response.json();
+  
+  return res.send(token);
+  } 
+  catch (error) 
+  {
+    console.log(error)
+  }
+  
+  return res.send("not valid");
 }
 
 
@@ -83,4 +137,4 @@ async function postDetailsHandler(req , res)
     return res.redirect('/')
 }
 
-module.exports = {postLoginHandler, postDetailsHandler, postSignHandler}
+module.exports = {postLoginHandler,  postSignLocalHandler, postDetailsHandler, postSignGoogleHandler}

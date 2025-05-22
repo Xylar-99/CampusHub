@@ -17,15 +17,15 @@ const routes = [
     } ,
     {
         method  : 'GET', 
-        url     : '/user'  ,
-        handler : getHandlers.getUserHandler,
+        url     : '/signup'  ,
+        handler : getHandlers.getSignupHandler,
     } ,
-    // {
-    //     method : 'GET' , 
-    //     url     : '/auth/google' ,
-    //     handler : getHandlers.getAuthGooglehandler,
-    // },
-     {
+    {
+        method  : 'GET', 
+        url     : '/login'  ,
+        handler : getHandlers.getLoginHandler,
+    } ,
+    {
         method : 'GET' , 
         url     : '/auth/google/callback' ,
         handler : getHandlers.getCallbackhandler,
@@ -37,9 +37,10 @@ const routes = [
         schema  : {schema: {body : authSchemas.signupSchema}},
     },
     {
-        method  : 'GET' , 
-        url     : '/login/google' ,
+        method  : 'POST' , 
+        url     : '/login' ,
         handler : postHandlers.postLoginHandler,
+        schema  : {schema: {body : authSchemas.loginSchema}},
     },
 ]
 

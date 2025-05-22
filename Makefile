@@ -5,10 +5,9 @@ up:
 
 down:
 	docker compose -f ${FILE} down
-	sudo rm -rf  ./frontend/images/*
-	sudo rm -rf  ./frontend/uploads/*
+	docker rmi $(docker images -q)
 
 fclean:
-	docker compose -f ${FILE} down -v 
+	docker compose -f ${FILE} down -v --rmi all
 
 re:clean all

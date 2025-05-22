@@ -7,4 +7,4 @@ const token_config = {
   }
 
 
-module.exports = {token_config}
+module.exports =  token_config

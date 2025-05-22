@@ -1,5 +1,6 @@
 
 const app = require('../services/server').app
+const config_token = require('../controllers/settings')
 
 
 async function getRootHandler(req , res) 
@@ -8,7 +9,20 @@ async function getRootHandler(req , res)
 }
 
 
-// // get my user
+
+async function getSignupHandler(req , res) 
+{
+    return res.type('text/html').sendFile('./pages/signup.html')
+}
+
+
+
+async function getLoginHandler(req , res) 
+{
+    return res.type('text/html').sendFile('./pages/login.html')
+}
+
+
 async function getUserHandler(req , res) 
 {
     const respond = await fetch('http://user:4001/user');
@@ -17,40 +31,30 @@ async function getUserHandler(req , res)
 
 
 
-async function getAuthGooglehandler(req , res) 
-{
-
-  const redirectUrl = `https://accounts.google.com/o/oauth2/v2/auth?` +
-    `client_id=676952011207-ejdkepng7ovdfqmb109ingsgda5oncgb.apps.googleusercontent.com` +
-    `&redirect_uri=http://abquaoub.42.fr:4000/auth/google/callback` +
-    `&response_type=code` +
-    `&scope=openid%20email%20profile` +
-    `&access_type=offline` +
-    `&prompt=consent`;
-    
-  res.redirect(redirectUrl);
-}
-
-
 async function getCallbackhandler(req , res) 
 {
-
-  const token = await this.googleOAuth2.getAccessTokenFromAuthorizationCodeFlow(req);
+  const tokengoogle = await app.googleOAuth2.getAccessTokenFromAuthorizationCodeFlow(req);
 
   const result = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
     headers: {
-      Authorization: `Bearer ${token.token.access_token}`
+      Authorization: `Bearer ${tokengoogle.token.access_token}`
     }
   });
 
-
   const user = await result.json();
 
+  const response = await fetch('http://user:4001/signup/google', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body:  JSON.stringify(user),
+    });
+  
+  const token = await response.json();
 
-  res.send(user);
-    
+  console.log(token)
+  return res.setCookie('token', token.token, config_token).send(token);
 }
 
 
 
-module.exports = {getRootHandler  , getCallbackhandler  , getAuthGooglehandler, getUserHandler }
+module.exports = {getRootHandler , getLoginHandler   ,getSignupHandler  , getCallbackhandler, getUserHandler }

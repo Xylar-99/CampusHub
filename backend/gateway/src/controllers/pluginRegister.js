@@ -42,7 +42,10 @@ const auth2_config = {
     }
   },
   startRedirectPath: '/auth/google',
-  callbackUri: 'http://abquaoub.42.fr:4000/auth/google/callback'
+  // my host in e1 , e2
+  callbackUri: 'http://localhost:4000/auth/google/callback'
+  //  my vm in c4
+  // callbackUri: 'http://abquaoub.42.fr:4000/auth/google/callback'
 }
 
 

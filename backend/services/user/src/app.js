@@ -11,8 +11,13 @@ const app = server.app;
 const routes = [
     {
         method  : 'POST' , 
-        url     : '/signup' ,
-        handler : postHandlers.postSignHandler,
+        url     : '/signup/local' ,
+        handler : postHandlers.postSignLocalHandler,
+    },
+    {
+        method  : 'POST' , 
+        url     : '/signup/google' ,
+        handler : postHandlers.postSignGoogleHandler,
     },
     {
         method  : 'POST' , 

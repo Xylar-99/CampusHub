@@ -3,6 +3,8 @@ version: "3.9"
 services:
 
   gateway:
+    depends_on:
+      - user
     build: ../backend/gateway
     image: gateway-image
     container_name: gateway
@@ -12,22 +14,24 @@ services:
         - web
     volumes:
         - ../frontend:/var/www/html/frontend
-  # user:
-  #   build: ../backend/services/user
-  #   image: user-image
-  #   container_name: user
-  #   expose:
-  #     - 4001
-  #   networks:
-  #       - web
-  # auth:
-  #   build: ../backend/services/auth
-  #   image: auth-image
-  #   container_name: auth
-  #   expose:
-  #     - 4002
-  #   networks:
-  #       - web
+  user:
+    depends_on:
+      - auth
+    build: ../backend/services/user
+    image: user-image
+    container_name: user
+    expose:
+      - 4001
+    networks: 
+        - web
+  auth:
+    build: ../backend/services/auth
+    image: auth-image
+    container_name: auth
+    expose:
+      - 4002
+    networks:
+        - web
 
 
 
