@@ -1,6 +1,7 @@
 
 const app = require('../services/server').app
 const config_token = require('../controllers/settings')
+const fetchPOST = require('../utils/fetch')
 
 
 async function getRootHandler(req , res) 
@@ -34,31 +35,16 @@ async function getUserHandler(req , res)
 }
 
 
-
 async function getCallbackhandler(req , res) 
 {
   const tokengoogle = await app.googleOAuth2.getAccessTokenFromAuthorizationCodeFlow(req);
-
-  const result = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
-    headers: {
-      Authorization: `Bearer ${tokengoogle.token.access_token}`
-    }
-  });
+  const result = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', { headers: { Authorization: `Bearer ${tokengoogle.token.access_token}` } });
 
   const user = await result.json();
+  const token = await fetchPOST('http://user:4001/signup/google' , user);
 
-  const response = await fetch('http://user:4001/signup/google', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body:  JSON.stringify(user),
-    });
-  
-  const token = await response.json();
-
-  console.log(token)
   return res.setCookie('token', token.token, config_token).send(token);
 }
-
 
 
 module.exports = {getRootHandler , getLoginHandler , getverificationpHandler  ,getSignupHandler  , getCallbackhandler, getUserHandler }
