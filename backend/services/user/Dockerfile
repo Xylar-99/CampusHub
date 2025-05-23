@@ -1,6 +1,6 @@
 FROM node:20
 
-RUN apt-get update  -y && apt-get install -y openssl sqlite3 libssl-dev
+RUN apt-get update  -y && apt-get install -y openssl sqlite3 libssl-dev vim
 
 WORKDIR /user
 

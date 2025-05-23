@@ -2,7 +2,7 @@ FROM node:20
 
 RUN apt-get update && apt-get install -y openssl libssl-dev
 
-WORKDIR /user
+WORKDIR /auth
 
 COPY ./src/ .
 

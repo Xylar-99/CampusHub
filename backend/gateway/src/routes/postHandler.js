@@ -5,20 +5,24 @@ const config_token = require('../controllers/settings')
 async function postSignHandler(req , res)
 {
   if(Object.values(req.body).includes(''))
-    return res.redirect('/');
+    return res.redirect('/signup');
 
   req.session.email = req.body.email
 
   const result = await fetchPOST('http://user:4001/signup/local' , req.body);
 
-  if(result.check == 'no')
+  if(!result.check)
     return res.redirect('/signup')
 
   return res.redirect('/verification')
 }
 
+
+
 async function postverificationHandler(req , res) 
 {
+
+
   const {code } = req.body;
   const email = req.session.get('email');
 

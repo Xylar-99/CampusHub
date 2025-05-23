@@ -10,6 +10,11 @@ const app = server.app;
 
 const routes = [
     {
+        method  : 'GET' , 
+        url     : '/me' ,
+        handler : getHandlers.getUserHandler,
+    },
+    {
         method  : 'POST' , 
         url     : '/signup/local' ,
         handler : postHandlers.postSignLocalHandler,

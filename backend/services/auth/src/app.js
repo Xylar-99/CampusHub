@@ -12,6 +12,11 @@ const routes = [
         url     : '/token/create'  ,
         handler : postHandlers.postCreateToken,
     } ,
+    {
+        method  : 'POST', 
+        url     : '/token/verify'  ,
+        handler : postHandlers.postVerifyToken,
+    } ,
 ]
 
 

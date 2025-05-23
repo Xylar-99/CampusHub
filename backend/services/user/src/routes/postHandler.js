@@ -26,7 +26,6 @@ async function postSignLocalHandler(req , res)
   body_data.ver_code      = randomNumber;
   data = { data:body_data }
   
-
   try
   {
     // store data 
@@ -110,10 +109,10 @@ async function postLoginHandler(req , res)
   try 
   {
     const user = await prisma.user.findUnique({where : {email : email , auth_provider : {not : 'google'}} });
-    
+
     if(!user || user.password != req.body.password)
       throw new Error('false');
-  
+
     const token = await fetchPOST('http://auth:4002/token/create' , email);
     return res.send(token);
   } 

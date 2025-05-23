@@ -27,6 +27,11 @@ const routes = [
     } ,
     {
         method  : 'GET', 
+        url     : '/me'  ,
+        handler : getHandlers.getMeHandler,
+    } ,
+    {
+        method  : 'GET', 
         url     : '/login'  ,
         handler : getHandlers.getLoginHandler,
     } ,
@@ -43,14 +48,14 @@ const routes = [
     },
     {
         method  : 'POST' , 
-        url     : '/verification' ,
-        handler : postHandlers.postverificationHandler,
-    },
-    {
-        method  : 'POST' , 
         url     : '/login' ,
         handler : postHandlers.postLoginHandler,
         schema  : {schema: {body : authSchemas.loginSchema}},
+    },
+    {
+        method  : 'POST' , 
+        url     : '/verification' ,
+        handler : postHandlers.postverificationHandler,
     },
 ]
 

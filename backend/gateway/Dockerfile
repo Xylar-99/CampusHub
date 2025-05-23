@@ -1,6 +1,6 @@
 FROM node:20
 
-RUN apt-get update && apt-get install -y openssl libssl-dev
+RUN apt-get update && apt-get install -y openssl libssl-dev vim
 
 WORKDIR /gateway
 
