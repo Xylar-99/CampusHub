@@ -1,21 +1,27 @@
 const WebSocket = require('ws')
 
+const clients = new Map();
+
+
 // get my user
 async function getUserHandler(req , res) 
 {
-  const ws = new WebSocket('ws://chat:4003');
+  const ws = new WebSocket('ws://chat:4040');
+  clients.set('1', ws);
 
-  console.log(ws);
-  console.log('hello wo');
-
-  if (ws.readyState === WebSocket.OPEN) {
-    console.log("✅ It's connected");
-  } else {
-    console.log("❌ Not connected yet");
-  }
-
-  return res.send(ws);
+  return res.send({message : 'valid'});
 }
 
 
-module.exports = {getUserHandler };
+
+// get my user
+async function postSendHandler(req , res) 
+{
+
+  clients.get('1').send('hello world new message');
+  return res.send({message : 'valid'});
+}
+
+
+
+module.exports = {getUserHandler , postSendHandler };

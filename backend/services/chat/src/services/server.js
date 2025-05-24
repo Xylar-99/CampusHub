@@ -4,7 +4,7 @@ const WebSocket = require('ws');
 async function StartServer()
 {
 
-const server = new WebSocket.Server({ port: 4003 });
+const server = new WebSocket.Server({ port: 4040 });
 
 server.on('connection', (socket) => {
   console.log('🔌 Client connected');
@@ -28,8 +28,8 @@ server.on('connection', (socket) => {
   });
 });
 
-  console.log('🚀 WebSocket server running on ws://localhost:4003');
-  // app.listen({port : 4003, host: '0.0.0.0'} , () => {console.log('server listen on abquaoub.42.fr:3000 ...')})
+  console.log('🚀 WebSocket server running on ws://localhost:4040');
+  app.listen({port : 4003, host: '0.0.0.0'} , () => {console.log('server listen on abquaoub.42.fr:3000 ...')})
 }
 
 module.exports = {app , StartServer}

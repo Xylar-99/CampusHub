@@ -17,6 +17,32 @@ const mailOptions = {
   text: '455',
 };
 
+
+async function postSendMessageHandler(req , res) 
+{
+  const {message } = req.body;
+
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // handler local signup 
 async function postSignLocalHandler(req , res)
 {

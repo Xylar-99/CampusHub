@@ -11,19 +11,23 @@ async function getRootHandler(req , res)
 }
 
 
-
 async function getChatHandler(req , res) 
 {
-    const ws = new WebSocket('ws://chat:4003/new');
-    
-    if (ws.readyState === WebSocket.OPEN) {
-        console.log("✅ It's connected");
-      } else {
-        console.log("❌ Not connected yet");
-      }
-    return res.send(ws);
+  const ws = await fetch('http://chat:4003/new');
+  const data = await ws.json();
+
+  return res.send(data);
 }
 
+
+
+async function getSendHandler(req , res) 
+{
+  const ws = await fetch('http://chat:4003/send');
+  const data = await ws.json();
+
+  return res.send(data);
+}
 
 
 
@@ -81,4 +85,4 @@ async function getCallbackhandler(req , res)
 }
 
 
-module.exports = {getRootHandler , getMeHandler , getChatHandler , getLoginHandler , getverificationpHandler  ,getSignupHandler  , getCallbackhandler }
+module.exports = {getRootHandler , getMeHandler , getSendHandler , getChatHandler , getLoginHandler , getverificationpHandler  ,getSignupHandler  , getCallbackhandler }

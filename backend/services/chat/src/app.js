@@ -9,7 +9,9 @@ require('./controllers/pluginRegister')();
 const app = server.app;
 
 
-app.get('/new' , { websocket: true } , getHandlers.getUserHandler);
+app.get('/new', getHandlers.getUserHandler);
+app.get('/send' , getHandlers.postSendHandler)
+
 
 // const routes = [
 //     {

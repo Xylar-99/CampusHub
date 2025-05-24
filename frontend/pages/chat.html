@@ -3,18 +3,24 @@
 <body>
   <h2>Simple WebSocket Chat</h2>
   <input id="msg" placeholder="Enter message" />
+  <button onclick="send()" ></button>
   <ul id="log"></ul>
 
   <script>
 
-  const ws = new WebSocket('ws://localhost:4000/chat');
+  fetch('http://localhost:4000/chat')
+  .then(response => response.json())
+  .then(alert('hello world'))
 
-  if (ws.readyState === WebSocket.OPEN) {
-    alert("✅ It's connected");
-  } else {
-    alert("❌ Not connected yet");
+  function send()
+  {
+    fetch('http://localhost:4000/send')
+  .then(response => response.json())
+  .then(alert('hello world'))
+
   }
 
+  alert(data);
   </script>
 </body>
 </html>
