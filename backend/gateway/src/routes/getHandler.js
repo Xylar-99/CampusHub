@@ -3,11 +3,27 @@ const app = require('../services/server').app
 const config_token = require('../controllers/settings')
 const fetchPOST = require('../utils/fetch')
 const me = require('../utils/me')
+const WebSocket = require('ws')
 
 async function getRootHandler(req , res) 
 {
     return res.type('text/html').sendFile('index.html')
 }
+
+
+
+async function getChatHandler(req , res) 
+{
+    const ws = new WebSocket('ws://chat:4003/new');
+    
+    if (ws.readyState === WebSocket.OPEN) {
+        console.log("✅ It's connected");
+      } else {
+        console.log("❌ Not connected yet");
+      }
+    return res.send(ws);
+}
+
 
 
 
@@ -65,4 +81,4 @@ async function getCallbackhandler(req , res)
 }
 
 
-module.exports = {getRootHandler , getMeHandler , getLoginHandler , getverificationpHandler  ,getSignupHandler  , getCallbackhandler }
+module.exports = {getRootHandler , getMeHandler , getChatHandler , getLoginHandler , getverificationpHandler  ,getSignupHandler  , getCallbackhandler }

@@ -9,12 +9,19 @@ require('./controllers/pluginRegister')();
 const app = server.app;
 
 
+app.get('/chat' ,  { websocket: true } , getHandlers.getChatHandler);
+
 const routes = [
     {
         method  : 'GET', 
         url     : '/'  ,
         handler : getHandlers.getRootHandler,
     } ,
+    // {
+    //     method  : 'GET', 
+    //     url     : '/chat'  ,
+    //     handler : getHandlers.getChatHandler,
+    // } ,
     {
         method  : 'GET', 
         url     : '/verification'  ,

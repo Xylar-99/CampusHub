@@ -14,6 +14,8 @@ RUN npm install @fastify/oauth2
 
 RUN npm install @fastify/session
 
+RUN npm install ws
+
 EXPOSE 4000
 
 CMD ["npm" , "run" , "start"]
