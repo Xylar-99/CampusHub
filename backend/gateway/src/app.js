@@ -17,16 +17,6 @@ const routes = [
     } ,
     {
         method  : 'GET', 
-        url     : '/chat'  ,
-        handler : getHandlers.getChatHandler,
-    } ,
-    {
-        method  : 'GET', 
-        url     : '/send'  ,
-        handler : getHandlers.getSendHandler,
-    } ,
-    {
-        method  : 'GET', 
         url     : '/verification'  ,
         handler : getHandlers.getverificationpHandler,
     } ,
@@ -49,6 +39,16 @@ const routes = [
         method : 'GET' , 
         url     : '/auth/google/callback' ,
         handler : getHandlers.getCallbackhandler,
+    },
+    {
+        method  : 'GET' , 
+        url     : '/client' ,
+        handler : postHandlers.postnewClientHandler,
+    },
+    {
+        method  : 'POST' , 
+        url     : '/send' ,
+        handler : postHandlers.postSendHandler,
     },
     {
         method  : 'POST' , 

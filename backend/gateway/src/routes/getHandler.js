@@ -21,14 +21,6 @@ async function getChatHandler(req , res)
 
 
 
-async function getSendHandler(req , res) 
-{
-  const ws = await fetch('http://chat:4003/send');
-  const data = await ws.json();
-
-  return res.send(data);
-}
-
 
 
 async function getSignupHandler(req , res) 
@@ -85,4 +77,4 @@ async function getCallbackhandler(req , res)
 }
 
 
-module.exports = {getRootHandler , getMeHandler , getSendHandler , getChatHandler , getLoginHandler , getverificationpHandler  ,getSignupHandler  , getCallbackhandler }
+module.exports = {getRootHandler , getMeHandler  , getChatHandler , getLoginHandler , getverificationpHandler  ,getSignupHandler  , getCallbackhandler }

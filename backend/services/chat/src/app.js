@@ -9,41 +9,22 @@ require('./controllers/pluginRegister')();
 const app = server.app;
 
 
-app.get('/new', getHandlers.getUserHandler);
-app.get('/send' , getHandlers.postSendHandler)
-
-
-// const routes = [
-//     {
-//         method  : 'GET' , 
-//         url     : '/new' ,
-//         handler : getHandlers.getUserHandler,
-//     },
-//     {
-//         method  : 'POST' , 
-//         url     : '/signup/local' ,
-//         handler : postHandlers.postSignLocalHandler,
-//     },
-//     {
-//         method  : 'POST' , 
-//         url     : '/signup/google' ,
-//         handler : postHandlers.postSignGoogleHandler,
-//     },
-//     {
-//         method  : 'POST' , 
-//         url     : '/login' ,
-//         handler : postHandlers.postLoginHandler,
-//     },
-//     {
-//         method  : 'POST' , 
-//         url     : '/verify' ,
-//         handler : postHandlers.postVerifyHandler,
-//     },
-// ]
+const routes = [
+    {
+        method  : 'GET' , 
+        url     : '/new' ,
+        handler : postHandlers.postNewClientHandler,
+    },
+    {
+        method  : 'POST' , 
+        url     : '/send' ,
+        handler : postHandlers.postSendHandler,
+    },
+]
 
 
 
-// routes.forEach(route => { app.route(routeUtils.handleDataChange(route)); })
+routes.forEach(route => { app.route(routeUtils.handleDataChange(route)); })
 server.StartServer();
 
 

@@ -19,6 +19,47 @@ async function postSignHandler(req , res)
 
 
 
+
+async function postnewClientHandler(req , res) 
+{
+  // const ws = await fetch('http://chat:4003/new' , {
+  // method: 'POST',
+  // headers: {
+  //   'Content-Type': 'application/json'
+  // },
+  // body: JSON.stringify(req.body)
+  // });
+
+  const ws = await fetch('http://chat:4003/new');
+  const data = await ws.json();
+
+  return res.send(data);
+}
+
+
+async function postSendHandler(req , res) 
+{
+
+  const body = {};
+  body.message = req.body.message;
+  body.userId = req.body.userId;
+
+  const ws = await fetch('http://chat:4003/send' , {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(body)
+  });
+
+  const data = await ws.json();
+
+  return res.send(data);
+}
+
+
+
+
 async function postverificationHandler(req , res) 
 {
 
@@ -52,4 +93,4 @@ async function postLoginHandler(req , res)
 
 
 
-module.exports = {postSignHandler, postverificationHandler ,postLoginHandler}
+module.exports = {postSignHandler,  postSendHandler , postnewClientHandler ,  postverificationHandler ,postLoginHandler}
