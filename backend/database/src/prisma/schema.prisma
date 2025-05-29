@@ -1,0 +1,38 @@
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:../db/dev.sqlite"
+}
+
+
+model User {
+  id            Int    @id @default(autoincrement())
+  name          String @unique
+  email         String @unique
+  auth_provider String @default("local")
+  ver_code      String     @default("999")
+  is_verified   Boolean @default(false)  
+  password      String  
+
+  @@map("users")
+}
+
+
+model Account_details {
+  user_id       Int    @unique
+  display_name  String @unique
+  friends       Json?
+  avatar_url    String
+}
+
+model friends {
+  id            Int    @id @default(autoincrement())
+  user_id       Int    
+  friend_id     Int
+  status        String
+}

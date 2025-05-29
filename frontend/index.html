@@ -1,118 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My Portfolio</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #f7f9fc;
-      color: #333;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-ZwDqlT7k...your_hash_here..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    header {
-      background: #1e1e2f;
-      color: white;
-      padding: 20px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+  <title>ft_transcendence</title>
 
-    header h1 {
-      margin: 0;
-      font-size: 24px;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 20px;
-      padding: 8px 16px;
-      border-radius: 6px;
-      background: #3a3a5f;
-      transition: background 0.3s;
-    }
-
-    nav a:hover {
-      background: #55557a;
-    }
-
-    .hero {
-      height: 80vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 20px;
-    }
-
-    .hero h2 {
-      font-size: 36px;
-      margin-bottom: 20px;
-    }
-
-    .hero p {
-      font-size: 18px;
-      max-width: 600px;
-      margin-bottom: 30px;
-    }
-
-    .btn-group a {
-      display: inline-block;
-      margin: 10px;
-      padding: 12px 24px;
-      background: #4CAF50;
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: background 0.3s;
-    }
-
-    .btn-group a:nth-child(2) {
-      background: #2196F3;
-    }
-
-    .btn-group a:nth-child(3) {
-      background: #ff9800;
-    }
-
-    .btn-group a:nth-child(4) {
-      background: #9c27b0;
-    }
-
-    .btn-group a:hover {
-      opacity: 0.9;
-    }
-
-    footer {
-      background: #1e1e2f;
-      color: white;
-      text-align: center;
-      padding: 10px;
-    }
-  </style>
 </head>
 <body>
 
-  <header>
-    <h1>My Portfolio</h1>
-    <nav>
-      <a href="/signup">Sign Up</a>
-      <a href="/login">Login</a>
-      <a href="./pages/chat.html">chat</a>
-      <a href="./pages/profile.html">View Profile</a>
-      
-    </nav>
-  </header>
 
-  <section class="hero">
-    <h2>Welcome to My Portfolio</h2>
-    <p>This is a simple personal portfolio landing page. You can sign up, log in, read the blog, or contact me directly.</p>
+
+
+
+<div id="account" class=" bg-white absolute top-0 left-0 h-full w-full grid grid-cols-[30%_70%] z-1">
+
+
+  <div class="grid grid-rows-[10%_450px_auto]" >
+
+    <div class=" items-center flex justify-center ">
+      <h2 class="text-[25px] font-bold text-blue-400">ft_transcendence</h2>
+    </div>
     
-  </section>
+    <div >
+      <!-- // signup -->
+    <div class="h-full grid grid-rows-[70px_auto] duration-500	" id="signup">
+        <h2 class="items-center flex justify-center text-[25px] text-blue-950 font-bold">Sign up for free!</h2>
+        <div class=" grid grid-rows-[3fr_1fr] ">
+          <form id="FormSignup" class="grid grid-cols-[80%]   items-center justify-center">
+            <input  type="email" name="email" id="email" placeholder="Email Address" class="focus:border-blue-400   pb-[10px] border-b-2 outline-none border-gray-300" >
+            <input  type="text" name="name" id="name" placeholder="Full name" class="focus:border-blue-400   pb-[10px] border-b-2 outline-none border-gray-300" >
+            <input  type="password" name="password" id="password" placeholder="Password" class="focus:border-blue-400   pb-[10px] border-b-2 outline-none border-gray-300" >
+          
+          <div class="text-center text-gray-600 font-normal text-[14px]">
+            <p class="pb-[10px]">I agree to the <a href="#" class="border-b-[1px] border-blue-600 text-blue-600">privacy policy</a> and <a href="#" class="border-b-[1px] border-blue-600 text-blue-600">terms of service</a>.</p>
+            <button type="submit" onclick="" class="hover:bg-blue-500 w-full h-[50px] bg-blue-400 rounded-[5px] text-[25px] text-amber-50">sign up</button>
+          </div>
+          
+        </form>
+        <div class=" h-full w-full flex flex-col justify-between">
+          <a href="#" class="w-[80%] h-[50px] text-center bg-red-400 hover:bg-red-500 rounded-[5px] text-[18px] text-amber-50  flex justify-center items-center  mx-auto">Sign up with email</a>
+          <a href="#" onclick="translate_login()" class="w-[80%] h-[50px] text-center flex justify-center mx-auto text-blue-600" >Already have an account?</a>
+        </div>
+      </div>
+    </div>
+     <!-- login  -->
+    <div class="h-full grid grid-rows-[100px_1fr_3fr]  translate-y-[-100%] translate-x-[100%] duration-500" id="login"> 
 
-  <footer>
-    &copy;
+      <div class="flex flex-col items-center">
+      <h2 class="flex items-center  justify-center text-[25px] text-blue-950 font-bold">Login to your account</h2>
+      <p class="text-[18px] text-gray-600"> Don’t have an account? <a href="#" onclick="translate_signup()" class=" text-blue-600" > Sign Up Free!</a> </p>
+        
+      </div>
+      <div class="grid grid-cols-3 grid-rows-[40px] w-[80%] gap-[20px] justify-center items-center mx-auto text-white">
+        <a href="#" class="bg-blue-500 h-full text-center flex justify-center items-center text-[25px] rounded-[10px]"><i class="fab fa-facebook "></i></a>
+        <a href="#" class="bg-black h-full text-center flex justify-center items-center text-[25px] rounded-[10px]"><i class="fab fa-x-twitter "></i></a>
+        <a href="#" class="bg-red-500 h-full text-center flex justify-center items-center text-[25px] rounded-[10px]"><i class="fab fa-google  "></i></a>
+      </div>
+
+      <div class="grid grid-rows-[3fr_1fr]">
+        <form id="FormLogin" class="grid grid-cols-[80%]   items-center justify-center">
+          <input  type="email" name="email" id="email" placeholder="Email Address" class="focus:border-blue-400   pb-[10px] border-b-2 outline-none border-gray-300" >
+          <input  type="password" name="password" id="password" placeholder="Password" class="focus:border-blue-400   pb-[10px] border-b-2 outline-none border-gray-300" >
+          
+          <div class="flex justify-between">
+            <div>  
+              <input type="checkbox" name="" id="" class="mr-[10px]"><span class="text-gray-600">Remember me</span>
+            </div>
+            <a href="#" onclick="translate_forget()" class="text-blue-600 hover:outline-1">Forgot password?</a>
+          </div>
+          <button type="submit" class="hover:bg-blue-500 w-full h-[50px] bg-blue-400 rounded-[5px] text-[25px] text-amber-50">login </button>
+          
+        </form>
+      </div>
+
+    </div>
+
+    <div class="h-full grid grid-rows-3  w-full pl-[10%] pr-[10%] items-center  justify-center mx-auto translate-y-[-200%] translate-x-[100%] duration-500" id="forget"> 
+
+      <div class=" flex flex-col justify-end h-full  w-full ">
+      <h2 class="text-[23px] pb-[5px] text-blue-950 font-bold">Recover your password</h2>
+      <p class="text-[15px] text-gray-600"> Fill in your e-mail address below and we will send you an email with further instructions.</p>
+        
+      </div>
+      
+
+      <div class=" h-auto w-full">
+        <form action="/reset" method="post" class="grid grid-rows-[1fr_0.2fr_1fr]">
+          <input  type="email" name="email" id="email" placeholder="Email Address" class="focus:border-blue-400   pb-[10px] border-b-2 outline-none border-gray-300" >
+          <div></div>
+          <button type="submit" class="hover:bg-blue-500 w-full h-[50px] bg-blue-400 rounded-[5px] text-[25px] text-amber-50">Recover your password </button>
+        </form>
+      </div>
+
+      <div class="h-[60px] mb-auto flex flex-col ">
+        <a href="#" onclick="translate_login()" class="w-[80%] h-[50px]  hover:text-blue-600 text-blue-500" >Already have an account?</a>
+        <a href="#" onclick="translate_signup()" class="w-[80%] h-[50px] hover:text-blue-600  text-blue-500" >Don’t have an account?</a>
+      </div>
+
+
+    </div>  
+
+    <div class="h-full grid grid-rows-3  w-full pl-[10%] pr-[10%] items-center  justify-center mx-auto  translate-y-[-300%] translate-x-[100%] duration-500" id="verify"> 
+
+      <div class=" flex flex-col justify-end h-full  w-full ">
+      <h2 class="text-[23px] pb-[5px] text-blue-950 font-bold">Confirm your email</h2>
+      <p class="text-[15px] text-gray-600"> Fill in your e-mail address below and we will send you an email with further instructions.</p>
+        
+      </div>
+      
+
+      <div class=" h-auto w-full">
+        <form id="FormVerify" class="grid grid-rows-[1fr_0.2fr_1fr]">
+          <input  type="text" name="code" id="code" placeholder="code validation" class="focus:border-blue-400   pb-[10px] border-b-2 outline-none border-gray-300" >
+          <div></div>
+          <button type="submit" class="hover:bg-blue-500 w-full h-[50px] bg-blue-400 rounded-[5px] text-[25px] text-amber-50">Verify your email </button>
+        </form>
+      </div>
+
+      <div class="h-[60px] mb-auto flex flex-col ">
+        <a href="#" onclick="translate_login()" class="w-[80%] h-[50px]  hover:text-blue-600 text-blue-500" >Already have an account?</a>
+        <a href="#" onclick="translate_signup()" class="w-[80%] h-[50px] hover:text-blue-600  text-blue-500" >Don’t have an account?</a>
+      </div>
+
+
+    </div> 
+  
+
+  </div>
+  
+  </div>
+
+
+
+
+  <div class="bg-gray-500 flex items-center justify-center z-1">
+    <div class="text-center">
+      <h2  class="text-[45px] font-bold text-white">Welcome to ft_transcendence Account</h2>
+      <p class="text-[18px] text-gray-50">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
+
+</div> 
+
+
+
+
+  <script src="js/profile.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" ></script>
+</body>
+</html>

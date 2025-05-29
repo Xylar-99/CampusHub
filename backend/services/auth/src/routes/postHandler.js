@@ -1,6 +1,4 @@
-const  app = require('../services/server').app;
-
-
+const  app = require('../server').app;
 
 
 async function postVerifyToken(req , res) 
@@ -17,6 +15,7 @@ async function postCreateToken(req , res)
 {
   const data = {email : req.body}
   const token = app.jwt.sign(data)
+
   return res.send({token : token});
 }
 

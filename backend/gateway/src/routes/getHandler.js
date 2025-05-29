@@ -1,31 +1,23 @@
-
-const app = require('../services/server').app
+const app = require('../server').app
 const config_token = require('../controllers/settings')
-const fetchPOST = require('../utils/fetch')
-const me = require('../utils/me')
-const WebSocket = require('ws')
+const helper = require('../utils/helper')
+
+
+
 
 async function getRootHandler(req , res) 
 {
     return res.type('text/html').sendFile('index.html')
 }
 
-
-async function getChatHandler(req , res) 
-{
-  const ws = await fetch('http://chat:4003/new');
-  const data = await ws.json();
-
-  return res.send(data);
-}
-
-
-
-
-
 async function getSignupHandler(req , res) 
 {
     return res.type('text/html').sendFile('./pages/signup.html')
+}
+
+async function getAccountHandler(req , res) 
+{
+    return res.type('text/html').sendFile('./pages/account.html')
 }
 
 async function getLoginHandler(req , res) 
@@ -33,12 +25,15 @@ async function getLoginHandler(req , res)
     return res.type('text/html').sendFile('./pages/login.html')
 }
 
-
-
+async function getMeHandler(req , res) 
+{
+    const whoami = await helper.me(req);
+    return res.send(whoami);
+}
 
 async function getverificationpHandler(req , res) 
 {
-    const whoami = await me(req);
+    const whoami = await helper.me(req);
     
     console.log(whoami.email);
     if(whoami.email != undefined)
@@ -50,31 +45,21 @@ async function getverificationpHandler(req , res)
     return res.type('text/html').sendFile('./pages/verification.html')
 }
 
-
-
-async function getMeHandler(req , res) 
-{
-    const whoami = await me(req);
-    return res.send(whoami);
-}
-
-
 async function getCallbackhandler(req , res) 
 {
     // get token of user from google
-  const tokengoogle = await app.googleOAuth2.getAccessTokenFromAuthorizationCodeFlow(req);
-  const result = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', { headers: { Authorization: `Bearer ${tokengoogle.token.access_token}` } });
+    const tokengoogle = await app.googleOAuth2.getAccessTokenFromAuthorizationCodeFlow(req);
+    const result = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', { headers: { Authorization: `Bearer ${tokengoogle.token.access_token}` } });
+    const user = await result.json();
 
-  // info user google
-  const user = await result.json();
-  // create token jwt for user of google
-  const token = await fetchPOST('http://user:4001/signup/google' , user);
+    // create token jwt for user of google
+    const token = await helper.fetchPOST('http://user:4001/signup/google' , user);
 
-  if(token.check == false)
-    return res.redirect('/signup');
+    // if(token.check == false)
+    //   return res.redirect('/signup');
 
-  return res.setCookie('token', token.token, config_token).send(token);
+  return res.setCookie('token', token.token, config_token).redirect('/me');
 }
 
 
-module.exports = {getRootHandler , getMeHandler  , getChatHandler , getLoginHandler , getverificationpHandler  ,getSignupHandler  , getCallbackhandler }
+module.exports = {getRootHandler , getMeHandler , getAccountHandler   , getLoginHandler , getverificationpHandler  ,getSignupHandler  , getCallbackhandler }

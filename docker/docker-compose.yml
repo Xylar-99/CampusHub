@@ -32,15 +32,14 @@ services:
       - 4002
     networks:
         - web
-  chat:
-    build: ../backend/services/chat
-    image: chat-image
-    container_name: chat
+  database:
+    build: ../backend/database
+    image: database-image
+    container_name: database
     expose:
       - 4003
     networks: 
         - web
-
 
 
 networks:

@@ -1,19 +1,29 @@
-const server = require('./services/server')
+const server = require('./server')
 const getHandlers = require('./routes/getHandler')
 const postHandlers = require('./routes/postHandler')
-const handleDataChange = require('./utils/serverUtils')
-const authSchemas = require('./controllers/authSchemas')
+const helper = require('./utils/helper')
+
 
 require('./controllers/pluginRegister')(); 
-
 const app = server.app;
 
 
 const routes = [
+    // get methods
     {
         method  : 'GET', 
         url     : '/'  ,
         handler : getHandlers.getRootHandler,
+    } ,
+    {
+        method : 'GET' , 
+        url     : '/auth/google/callback' ,
+        handler : getHandlers.getCallbackhandler,
+    },
+    {
+        method  : 'GET', 
+        url     : '/signup'  ,
+        handler : getHandlers.getSignupHandler,
     } ,
     {
         method  : 'GET', 
@@ -22,8 +32,8 @@ const routes = [
     } ,
     {
         method  : 'GET', 
-        url     : '/signup'  ,
-        handler : getHandlers.getSignupHandler,
+        url     : '/login'  ,
+        handler : getHandlers.getLoginHandler,
     } ,
     {
         method  : 'GET', 
@@ -32,46 +42,35 @@ const routes = [
     } ,
     {
         method  : 'GET', 
-        url     : '/login'  ,
-        handler : getHandlers.getLoginHandler,
+        url     : '/account'  ,
+        handler : getHandlers.getAccountHandler,
     } ,
-    {
-        method : 'GET' , 
-        url     : '/auth/google/callback' ,
-        handler : getHandlers.getCallbackhandler,
-    },
-    {
-        method  : 'GET' , 
-        url     : '/client' ,
-        handler : postHandlers.postnewClientHandler,
-    },
-    {
-        method  : 'POST' , 
-        url     : '/send' ,
-        handler : postHandlers.postSendHandler,
-    },
+
+    // post methods
     {
         method  : 'POST' , 
         url     : '/signup' ,
         handler : postHandlers.postSignHandler,
-        schema  : {schema: {body : authSchemas.signupSchema}},
     },
     {
         method  : 'POST' , 
         url     : '/login' ,
         handler : postHandlers.postLoginHandler,
-        schema  : {schema: {body : authSchemas.loginSchema}},
     },
     {
         method  : 'POST' , 
         url     : '/verification' ,
         handler : postHandlers.postverificationHandler,
     },
+    {
+        method  : 'POST' , 
+        url     : '/update' ,
+        handler : postHandlers.postUpdateHandler,
+    },
 ]
 
 
-
-routes.forEach(route => { app.route(handleDataChange(route)); })
+routes.forEach(route => { app.route(helper.initRoutesFromConfig(route)); })
 server.StartServer();
 
 
