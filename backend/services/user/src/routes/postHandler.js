@@ -13,22 +13,16 @@ const mailOptions = {
 
 async function  receve_rabbitmq() 
 {
-  const rabbitSettings = {
-                protocol: 'amqp',
-                hostname: 'rabbitmq',     
-                port: 5672,
-                username: 'admin',        
-                password: 'admin',
-            };
-
-    const connection = await amqp.connect(rabbitSettings);
+    const connection = await amqp.connect('amqp://rabbitmq:5672');
     const channel = await connection.createChannel();
 
     const queue = 'email';
-
     await channel.assertQueue(queue);
 
+
     channel.consume(queue, (msg) => {
+      console.log(msg)
+      console.log("///////////////////////////////");
     console.log(`✅ Received: ${msg.content.toString()}`);
     });
 
@@ -55,7 +49,8 @@ async function postSignLocalHandler(req , res)
     const user = await helper.findUnique('user' , {where: {email : body_data.email} })
     const profile = {avatar_url : '../images/default.jpg' , display_name : 'player' ,user_id : user.id}
     await helper.create('account_details' , profile)
-
+    
+    await receve_rabbitmq();
 
     mailOptions.to = body_data.email;
     mailOptions.text = String(randomNumber);
@@ -69,7 +64,6 @@ async function postSignLocalHandler(req , res)
   }
 
 
-  await receve_rabbitmq();
 
   return res.send({check:false});
 }

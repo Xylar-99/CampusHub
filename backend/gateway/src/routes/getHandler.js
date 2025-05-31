@@ -8,23 +8,13 @@ const amqp = require('amqplib');
 
 async function  connect_rabbitmq() 
 {
-    const rabbitSettings = {
-                protocol: 'amqp',
-                hostname: 'rabbitmq',     
-                port: 5672,
-                username: 'admin',        
-                password: 'admin',
-            };
-
-        
     try {
         
-        const connection = await amqp.connect(rabbitSettings);
-        
+        const connection = await amqp.connect('amqp://rabbitmq:5672');
         const channel = await connection.createChannel();
         
         const queue = 'email';
-        const message = 'Hello from Fastify!';
+        const message = 'Hello from abdelbassat!';
         
         await channel.assertQueue(queue);
         
