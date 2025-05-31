@@ -6,14 +6,12 @@ WORKDIR /user
 
 COPY ./src/ .
 
-COPY ./config/package.json .
-
-COPY ./tools/* /usr/bin/
+COPY ./package.json .
 
 RUN npm install
 
-RUN npm install amqplib
+RUN npx prisma generate
 
 EXPOSE 4001
 
-CMD ["bash" , "/usr/bin/script.sh"]
+CMD ["npm" , "run" , "start"]

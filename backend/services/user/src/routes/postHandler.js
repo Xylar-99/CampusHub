@@ -1,4 +1,5 @@
 const helper = require('../utils/helper')
+const prisma = require('../db/db')
 const amqp = require('amqplib');
 
 
@@ -8,7 +9,6 @@ const mailOptions = {
   subject: 'hii',
   text: '455',
 };
-
 
 
 async function  receve_rabbitmq() 
@@ -21,14 +21,10 @@ async function  receve_rabbitmq()
 
 
     channel.consume(queue, (msg) => {
-      console.log(msg)
-      console.log("///////////////////////////////");
     console.log(`✅ Received: ${msg.content.toString()}`);
     });
 
 }
-
-
 
 
 // handler local signup 
@@ -43,12 +39,11 @@ async function postSignLocalHandler(req , res)
   
   try
   {
-    await helper.create('user' , body_data)
-
+    await prisma.user.create(data)
   
-    const user = await helper.findUnique('user' , {where: {email : body_data.email} })
+    const user = await prisma.user.findUnique({where: {email : body_data.email} })
     const profile = {avatar_url : '../images/default.jpg' , display_name : 'player' ,user_id : user.id}
-    await helper.create('account_details' , profile)
+    await prisma.account_details.create({data:profile})
     
     await receve_rabbitmq();
 
@@ -63,13 +58,8 @@ async function postSignLocalHandler(req , res)
     console.log("ready exist")
   }
 
-
-
   return res.send({check:false});
 }
-
-
-
 
 
 
@@ -85,11 +75,11 @@ async function postSignGoogleHandler(req , res)
 
   try
   {
-    await helper.create('user' , body_data);
+    await prisma.user.create({data:body_data});
   
-    const user = await helper.findUnique( 'user'  ,  {where: {email : body_data.email} })
+    const user = await prisma.user.findUnique({where: {email : body_data.email} })
     const profile = {avatar_url : req.body.picture , display_name : 'player' ,user_id : user.id}
-    await helper.create('account_details' , profile);
+    await prisma.account_details.create({data:profile});
   
   }
   catch(error)
@@ -102,22 +92,21 @@ async function postSignGoogleHandler(req , res)
 }
 
 
-
-
 async function postVerifyHandler(req , res) 
 {
   const {email , code} = req.body;
   const error = {verify : true};
 
   try {
-    const user = await helper.findUnique('user' , {where : { email : email , auth_provider : {not : 'google' } , is_verified : {not : true } }});
+    const user = await prisma.user.findUnique({where : { email : email , auth_provider : {not : 'google' } , is_verified : {not : true } }});
 
     if(user.ver_code != code)
-    {914154
+    {
       console.log("error in ver_code")
       throw new Error('false');
     }
-    await helper.update('user' , { where: { id: user.id }, data: { is_verified: true }, });
+
+    await prisma.user.update({ where: { id: user.id }, data: { is_verified: true }, });
 
   }
   catch (error) 
@@ -136,7 +125,7 @@ async function postLoginHandler(req , res)
 
   try 
   {
-    const user = await helper.findUnique('user' ,{where : {email : email , auth_provider : {not : 'google'} , is_verified : {not : false}} });
+    const user = await prisma.user.findUnique({where : {email : email , auth_provider : {not : 'google'} , is_verified : {not : false}} });
     if(!user || user.password != req.body.password)
       throw new Error('false');
 
@@ -154,15 +143,13 @@ async function postLoginHandler(req , res)
 
 
 
-
-
 async function postUpdateHandler(req , res)
 {
 
   console.log(req.body.user_id);
   try 
   {
-    await helper.update('account_details' , { where : {user_id : req.body.user_id} , data : req.body  });
+    await prisma.account_details.update({ where : {user_id : req.body.user_id} , data : req.body  });
   } 
   catch (error) 
   {
@@ -171,8 +158,6 @@ async function postUpdateHandler(req , res)
 
   return res.send({msg : 'valid'})
 }
-
-
 
 
 module.exports = {postLoginHandler , postUpdateHandler, postVerifyHandler ,  postSignLocalHandler, postSignGoogleHandler}
