@@ -12,6 +12,8 @@ COPY ./tools/* /usr/bin/
 
 RUN npm install
 
+RUN npm install amqplib
+
 EXPOSE 4001
 
 CMD ["bash" , "/usr/bin/script.sh"]

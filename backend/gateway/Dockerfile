@@ -24,6 +24,8 @@ RUN npm install @fastify/multipart@latest
 
 RUN npm install @fastify/formbody
 
+RUN npm install amqplib
+
 EXPOSE 4000
 
 CMD ["npm" , "run" , "start"]

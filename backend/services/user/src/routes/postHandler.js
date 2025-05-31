@@ -1,4 +1,5 @@
 const helper = require('../utils/helper')
+const amqp = require('amqplib');
 
 
 const mailOptions = {
@@ -7,6 +8,33 @@ const mailOptions = {
   subject: 'hii',
   text: '455',
 };
+
+
+
+async function  receve_rabbitmq() 
+{
+  const rabbitSettings = {
+                protocol: 'amqp',
+                hostname: 'rabbitmq',     
+                port: 5672,
+                username: 'admin',        
+                password: 'admin',
+            };
+
+    const connection = await amqp.connect(rabbitSettings);
+    const channel = await connection.createChannel();
+
+    const queue = 'email';
+
+    await channel.assertQueue(queue);
+
+    channel.consume(queue, (msg) => {
+    console.log(`✅ Received: ${msg.content.toString()}`);
+    });
+
+}
+
+
 
 
 // handler local signup 
@@ -39,6 +67,9 @@ async function postSignLocalHandler(req , res)
   {
     console.log("ready exist")
   }
+
+
+  await receve_rabbitmq();
 
   return res.send({check:false});
 }

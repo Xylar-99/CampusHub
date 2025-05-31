@@ -3,10 +3,46 @@ const config_token = require('../controllers/settings')
 const helper = require('../utils/helper')
 
 
+const amqp = require('amqplib');
+
+
+async function  connect_rabbitmq() 
+{
+    const rabbitSettings = {
+                protocol: 'amqp',
+                hostname: 'rabbitmq',     
+                port: 5672,
+                username: 'admin',        
+                password: 'admin',
+            };
+
+        
+    try {
+        
+        const connection = await amqp.connect(rabbitSettings);
+        
+        const channel = await connection.createChannel();
+        
+        const queue = 'email';
+        const message = 'Hello from Fastify!';
+        
+        await channel.assertQueue(queue);
+        
+        channel.sendToQueue(queue, Buffer.from(message));
+        
+    } 
+    catch (error) 
+    {
+        console.log("Error");
+    }
+}
+
 
 
 async function getRootHandler(req , res) 
 {
+
+    await connect_rabbitmq();
     return res.type('text/html').sendFile('index.html')
 }
 
