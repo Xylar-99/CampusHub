@@ -19,19 +19,19 @@ services:
         - web
     volumes:
         - ./frontend:/var/www/html/frontend
-  # user:
-  #   build: ./backend/services/user-service
-  #   image: user-image
-  #   container_name: user
-  #   command: sh -c "npx prisma migrate dev --name init && npm run start "
-  #   networks: 
-  #       - web
-  # auth:
-  #   build: ./backend/services/auth-service
-  #   image: auth-image
-  #   container_name: auth
-  #   networks:
-  #       - web
+  user:
+    build: ./backend/services/user-service
+    image: user-image
+    container_name: user
+    command: sh -c "npx prisma migrate dev --name init && npm run start "
+    networks: 
+        - web
+  auth:
+    build: ./backend/services/auth-service
+    image: auth-image
+    container_name: auth
+    networks:
+        - web
   msghub:
     build: ./backend/services/msghub-service
     image: msghub-image

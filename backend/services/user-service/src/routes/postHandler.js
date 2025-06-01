@@ -3,27 +3,29 @@ const prisma = require('../db/db')
 const amqp = require('amqplib');
 
 
-const mailOptions = {
-  from: 'abdoqoubai@gmail.com',
-  to: 'aquaoubai@gmail.com',
-  subject: 'hii',
-  text: '455',
-};
 
-
-async function  receve_rabbitmq()
+async function  sendmsg_to_rabbitmq(data) 
 {
+    try {
+        
     const connection = await amqp.connect('amqp://rabbitmq:5672');
     const channel = await connection.createChannel();
+    
+    const queue = 'emailhub';
+    const msgBuffer = Buffer.from(JSON.stringify(data));
 
-    const queue = 'email';
     await channel.assertQueue(queue);
-
-    channel.consume(queue, (msg) => {
-    console.log(`✅ Received: ${msg.content.toString()}`);
-    });
-
+    channel.sendToQueue(queue, Buffer.from(msgBuffer));
+        
+    } 
+    catch (error) 
+    {
+        console.log("Error in rabbit connection " , error);
+    }
 }
+
+
+
 
 
 // handler local signup 
@@ -43,12 +45,9 @@ async function postSignLocalHandler(req , res)
     const user = await prisma.user.findUnique({where: {email : body_data.email} })
     const profile = {avatar_url : '../images/default.jpg' , display_name : 'player' ,user_id : user.id}
     await prisma.account_details.create({data:profile})
-    
-    await receve_rabbitmq();
 
-    mailOptions.to = body_data.email;
-    mailOptions.text = String(randomNumber);
-    helper.sendEmailMessage(mailOptions)
+    const msg  = {email : body_data.email , text : String(randomNumber)}
+    sendmsg_to_rabbitmq(msg)
 
     return res.send({check:true});
   }

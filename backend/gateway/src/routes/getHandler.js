@@ -3,37 +3,8 @@ const config_token = require('../controllers/settings')
 const helper = require('../utils/helper')
 
 
-const amqp = require('amqplib');
-
-
-async function  connect_rabbitmq() 
-{
-    try {
-        
-        const connection = await amqp.connect('amqp://rabbitmq:5672');
-        const channel = await connection.createChannel();
-        
-        const queue = 'emailhub';
-        const data = {email : "abdoqoubai@gmail.com" , text : "hello microservices niiiiiiiiiiiiiiiice"};
-        const msgBuffer = Buffer.from(JSON.stringify(data));
-
-        await channel.assertQueue(queue);
-        
-        channel.sendToQueue(queue, Buffer.from(msgBuffer));
-        
-    } 
-    catch (error) 
-    {
-        console.log("Error");
-    }
-}
-
-
-
 async function getRootHandler(req , res) 
 {
-
-    await connect_rabbitmq();
     return res.type('text/html').sendFile('index.html')
 }
 

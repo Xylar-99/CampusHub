@@ -53,28 +53,6 @@ function initRoutesFromConfig(route)
 ///////////////////////////////////////////////
 
 
-const transporter = nodemailer.createTransport({
-    service: 'gmail', 
-    auth: {
-        user: 'abdoqoubai@gmail.com',
-        pass: 'qfga utdh tpbw imtv', 
-    },
-});
-
-
-function sendEmailMessage(options)
-{
-    transporter.sendMail(options , (err ,info) =>
-    {
-        if(err)
-            console.log(err)
-    });
-    
-}
-
-///////////////////////////////////////////////
-
-
 async function create(table , _data) 
 {
   const res = await fetchPOST(`http://database:4003/store/${table}` , _data)
@@ -105,4 +83,4 @@ async function update(table , _data)
 /////////////////////////////////////////////
 
 
-module.exports = {initRoutesFromConfig  , update  , create , findUnique , getUserByToken , fetchPOST , sendEmailMessage}
+module.exports = {initRoutesFromConfig  , update  , create , findUnique , getUserByToken , fetchPOST }
