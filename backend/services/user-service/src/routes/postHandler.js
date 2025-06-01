@@ -11,14 +11,13 @@ const mailOptions = {
 };
 
 
-async function  receve_rabbitmq() 
+async function  receve_rabbitmq()
 {
     const connection = await amqp.connect('amqp://rabbitmq:5672');
     const channel = await connection.createChannel();
 
     const queue = 'email';
     await channel.assertQueue(queue);
-
 
     channel.consume(queue, (msg) => {
     console.log(`✅ Received: ${msg.content.toString()}`);

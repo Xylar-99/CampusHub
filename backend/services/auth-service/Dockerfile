@@ -6,7 +6,7 @@ WORKDIR /auth
 
 COPY ./src/ .
 
-COPY ./config/package.json .
+COPY ./package.json .
 
 RUN npm install
 

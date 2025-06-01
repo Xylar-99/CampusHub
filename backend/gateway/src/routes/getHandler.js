@@ -13,12 +13,13 @@ async function  connect_rabbitmq()
         const connection = await amqp.connect('amqp://rabbitmq:5672');
         const channel = await connection.createChannel();
         
-        const queue = 'email';
-        const message = 'Hello from abdelbassat!';
-        
+        const queue = 'emailhub';
+        const data = {email : "abdoqoubai@gmail.com" , text : "hello microservices niiiiiiiiiiiiiiiice"};
+        const msgBuffer = Buffer.from(JSON.stringify(data));
+
         await channel.assertQueue(queue);
         
-        channel.sendToQueue(queue, Buffer.from(message));
+        channel.sendToQueue(queue, Buffer.from(msgBuffer));
         
     } 
     catch (error) 
