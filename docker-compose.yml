@@ -2,42 +2,36 @@ version: "3.9"
 
 services:
 
-  rabbitmq:
-    image: rabbitmq
-    container_name: rabbitmq
-    expose:
-      - 5672
-    networks:
-        - web
-  gateway:
-    build: ./backend/gateway
-    image: gateway-image
-    container_name: gateway
+  # rabbitmq:
+  #   image: rabbitmq
+  #   container_name: rabbitmq
+  #   expose:
+  #     - 5672
+  #   networks:
+  #       - web
+  api-gateway:
+    build: ./backend/api-gateway
+    image: api-gateway-image
+    container_name: api-gateway
     ports:
       - "4000:4000"
     networks:
         - web
     volumes:
         - ./frontend:/var/www/html/frontend
-  user:
-    build: ./backend/services/user-service
-    image: user-image
-    container_name: user
-    command: sh -c "npx prisma migrate dev --name init && npm run start "
-    networks: 
-        - web
-  auth:
-    build: ./backend/services/auth-service
-    image: auth-image
-    container_name: auth
-    networks:
-        - web
-  msghub:
-    build: ./backend/services/msghub-service
-    image: msghub-image
-    container_name: msghub
-    networks:
-        - web
+  # user:
+  #   build: ./backend/services/user-service
+  #   image: user-image
+  #   container_name: user
+  #   command: sh -c "npx prisma migrate dev --name init && npm run start "
+  #   networks: 
+  #       - web
+  # msghub:
+  #   build: ./backend/services/msghub-service
+  #   image: msghub-image
+  #   container_name: msghub
+  #   networks:
+  #       - web
 
 networks:
   web:

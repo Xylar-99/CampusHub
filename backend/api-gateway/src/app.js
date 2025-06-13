@@ -71,6 +71,7 @@ const routes = [
 
 
 routes.forEach(route => { app.route(helper.initRoutesFromConfig(route)); })
+
 server.StartServer();
 
 

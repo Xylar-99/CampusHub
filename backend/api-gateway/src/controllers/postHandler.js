@@ -23,11 +23,13 @@ async function postSignHandler(req , res)
   
   req.session.email = req.body.email
   
-  // send body to container user  for proccess data 
-  const result = await helper.fetchPOST('http://user:4001/signup/local' , req.body);
+  // send body to container user  for proccess data
+
   
-  if(!result.check)
-    return res.status(400).send({msg : false});
+  // const result = await helper.fetchPOST('http://user:4001/signup/local' , req.body);
+  
+  // if(!result.check)
+  //   return res.status(400).send({msg : false});
 
   return res.send({msg : true});
 
@@ -106,4 +108,30 @@ async function postUpdateHandler(req , res)
 
 
 
-module.exports = {postSignHandler , postUpdateHandler  , postverificationHandler , postLoginHandler}
+
+
+
+
+//////////////////////// authhhhhhhhhhhhhhhhhhhhhhhhhhhhh///////////////////
+
+async function postVerifyToken(req , res) 
+{
+  const token = req.body.token;
+  const decoded = app.jwt.verify(token);
+
+  return res.send(decoded);
+}
+
+
+
+async function postCreateToken(req , res) 
+{
+  const data = {email : req.body}
+  const token = app.jwt.sign(data)
+
+  return res.send({token : token});
+}
+
+
+
+module.exports = {postVerifyToken , postCreateToken , postSignHandler , postUpdateHandler  , postverificationHandler , postLoginHandler}

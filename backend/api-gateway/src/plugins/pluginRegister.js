@@ -5,6 +5,7 @@ const multipart  = require('@fastify/multipart');
 const auth2 = require('@fastify/oauth2');
 const session = require('@fastify/session');
 const formbody = require('@fastify/formbody')
+const jwt = require('@fastify/jwt');
 
 
 const multipart_config = {
@@ -49,6 +50,17 @@ const session_option = {
   }
 
 
+
+
+  
+  
+  const jwt_config = {
+    secret: 'abquaoub' 
+  }
+  
+
+
+
   
 async function registerPlugins()
 {
@@ -58,6 +70,8 @@ async function registerPlugins()
   fastify.app.register(multipart , multipart_config);
   fastify.app.register(formbody);
   fastify.app.register(auth2 , auth2_config);
+  fastify.app.register(jwt, jwt_config);
+
 
 }
 
