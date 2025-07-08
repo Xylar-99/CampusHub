@@ -1,36 +1,54 @@
 version: "3.9"
 
 services:
-
-  # rabbitmq:
-  #   image: rabbitmq
-  #   container_name: rabbitmq
-  #   expose:
-  #     - 5672
-  #   networks:
-  #       - web
-  api-gateway:
-    build: ./backend/api-gateway
-    image: api-gateway-image
-    container_name: api-gateway
-    ports:
-      - "4000:4000"
+  redis:
+    image: redis:7
+    container_name: redis
     networks:
         - web
+  rabbitmq:
+    image: rabbitmq
+    container_name: rabbitmq
+    networks:
+        - web
+  gateway:
+    build: ./backend/gateway
+    image: gateway-image
+    container_name: gateway
+    command: sh -c "sleep 10 && npx prisma migrate dev --name init && npm run start "
+    ports:
+      - "4000:4000"
     volumes:
         - ./frontend:/var/www/html/frontend
-  # user:
-  #   build: ./backend/services/user-service
-  #   image: user-image
-  #   container_name: user
+    networks:
+        - web
+  user:
+    build: ./backend/services/user
+    image: user-image
+    container_name: user
+    command: sh -c "sleep 10 && npx prisma migrate dev --name init && npm run start "
+    networks:
+        - web
+  chat:
+    build: ./backend/services/chat
+    image: chat-image
+    container_name: chat
+    command: sh -c "sleep 15 && npx prisma migrate dev --name init && npm run start "
+    networks: 
+        - web
+  notify:
+    build: ./backend/services/notify
+    image: notify-image
+    container_name: notify
+    command: sh -c "sleep 20 && npm run start "
+    networks: 
+        - web
+  # game:
+  #   build: ./backend/services/game
+  #   image: game-image
+  #   container_name: game
   #   command: sh -c "npx prisma migrate dev --name init && npm run start "
   #   networks: 
-  #       - web
-  # msghub:
-  #   build: ./backend/services/msghub-service
-  #   image: msghub-image
-  #   container_name: msghub
-  #   networks:
   #       - web
 
 networks:
